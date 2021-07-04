@@ -3,4 +3,6 @@
     <string name="store">Store</string>
     <string name="settings">Settings</string>
     <string name="play">Play</string>
+    <string name="trueanswer">TrueAnswer</string>
+    <string name="falseanswer">FalseAnswer</string>
 </resources>
