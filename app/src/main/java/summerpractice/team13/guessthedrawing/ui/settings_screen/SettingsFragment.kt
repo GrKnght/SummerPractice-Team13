@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -11,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import summerpractice.team13.guessthedrawing.R
+import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.ChangeTimePresenter
 import summerpractice.team13.guessthedrawing.mvp.views.ChangeTimeView
 
 class SettingsFragment : Fragment(), ChangeTimeView {
+
 
     private lateinit var changeTimePresenter: ChangeTimePresenter
 
@@ -26,14 +29,20 @@ class SettingsFragment : Fragment(), ChangeTimeView {
         savedInstanceState: Bundle?
     ): View? {
 
+        context?.let { AppPreferences.init(it) }
+
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
         changeTimePresenter = ChangeTimePresenter(this)
 
-        val decreaseFB: FloatingActionButton = root.findViewById(R.id.decrementFB)
         val increaseFB: FloatingActionButton = root.findViewById(R.id.incrementFB)
         val secondsTW: TextView = root.findViewById(R.id.secondsTW)
 
+        val testButton: Button = root.findViewById(R.id.testSharedButton)
+        val testView: TextView = root.findViewById(R.id.testShared)
+
+
+        val decreaseFB: FloatingActionButton = root.findViewById(R.id.decrementFB)
         decreaseFB.setOnClickListener {
             changeTimePresenter.decrementTime()
             model.text.setValue(changeTimePresenter.counter.toString() + " sec")
@@ -41,7 +50,13 @@ class SettingsFragment : Fragment(), ChangeTimeView {
         }
         increaseFB.setOnClickListener {
             changeTimePresenter.incrementTime()
-            model.text.setValue(changeTimePresenter.counter.toString() + " sec")
+            model.text.value = changeTimePresenter.counter.toString() + " sec"
+            AppPreferences.time = changeTimePresenter.counter
+
+        }
+
+        testButton.setOnClickListener {
+            testView.text =  changeTimePresenter.counter.toString()
 
         }
         val nameObserver = Observer<String> { newName ->
