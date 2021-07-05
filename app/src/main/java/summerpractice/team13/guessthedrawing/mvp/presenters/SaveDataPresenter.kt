@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.widget.TextView
 
+
+// TODO: add here logic from AppPreferences
 open class SaveDataPresenter(context: Context) {
 
     private val APP_PREFERENCES = "settings"
@@ -11,7 +13,6 @@ open class SaveDataPresenter(context: Context) {
     private val TIME = "time"
 
     private lateinit var sharedPreferences: SharedPreferences
-
 
 
     fun init(context: Context) {
@@ -28,7 +29,6 @@ open class SaveDataPresenter(context: Context) {
         edit.apply()
 
     }
-
 
     fun loadData(textView: TextView) {
         textView.setText(sharedPreferences.getInt(APP_PREFERENCES, 1))

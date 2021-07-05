@@ -19,7 +19,6 @@ import summerpractice.team13.guessthedrawing.mvp.views.IChangeTimeView
 
 class SettingsFragment : Fragment(), IChangeTimeView {
 
-
     private lateinit var ichangeTimePresenter: IChangeTimePresenter
 
     private val model: SettingsViewModel by viewModels()
@@ -37,12 +36,13 @@ class SettingsFragment : Fragment(), IChangeTimeView {
         ichangeTimePresenter = ChangeTimePresenter(this)
 
         val increaseFB: FloatingActionButton = root.findViewById(R.id.incrementFB)
+        val decreaseFB: FloatingActionButton = root.findViewById(R.id.decrementFB)
         val secondsTW: TextView = root.findViewById(R.id.secondsTW)
 
+        // created for test
         val testButton: Button = root.findViewById(R.id.testSharedButton)
         val testView: TextView = root.findViewById(R.id.testShared)
 
-        val decreaseFB: FloatingActionButton = root.findViewById(R.id.decrementFB)
         decreaseFB.setOnClickListener {
             ichangeTimePresenter.decrementTime()
             model.text.setValue(ichangeTimePresenter.i.toString() + " sec")
