@@ -11,9 +11,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import summerpractice.team13.guessthedrawing.R
-import summerpractice.team13.guessthedrawing.mvp.presenters.answerCheckPresenter.AnswerCheckPresenter
-import summerpractice.team13.guessthedrawing.mvp.presenters.answerCheckPresenter.IAnswerCheckPresenter
-import summerpractice.team13.guessthedrawing.mvp.views.answerCheckView.IAnswerCheckView
+import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.AnswerCheckPresenter
+import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.IAnswerCheckPresenter
+import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswerCheckView
 
 class HomeFragment : Fragment(), IAnswerCheckView {
 

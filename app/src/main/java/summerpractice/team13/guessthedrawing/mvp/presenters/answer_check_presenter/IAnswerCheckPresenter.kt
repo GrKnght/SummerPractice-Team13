@@ -1,4 +1,4 @@
-package summerpractice.team13.guessthedrawing.mvp.presenters.answerCheckPresenter
+package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter
 
 import android.content.Context
 import android.widget.ImageView
