@@ -1,12 +1,14 @@
 <resources>
-    <string name="app_name">GuessTheDrawing</string>
+    <string name="app_name" translatable="false">GuessTheDrawing</string>
     <string name="store">Store</string>
     <string name="settings">Settings</string>
     <string name="play">Play</string>
-    <string name="trueanswer">TrueAnswer</string>
-    <string name="falseanswer">FalseAnswer</string>
+    <string name="trueanswer" translatable="false">TrueAnswer</string>
+    <string name="falseanswer" translatable="false">FalseAnswer</string>
     <string name="time">Time</string>
-    <string name="decrementfloatingbutton">decrementFloatingButton</string>
-    <string name="incrementfloatingbutton">incrementFloatingButton</string>
+    <string name="decrementfloatingbutton" translatable="false">decrementFloatingButton</string>
+    <string name="incrementfloatingbutton" translatable="false">incrementFloatingButton</string>
     <string name="_15sec">15sec</string>
+    <string name="guess">GUESS!</string>
+    <string name="write_your_answer">write your answer</string>
 </resources>

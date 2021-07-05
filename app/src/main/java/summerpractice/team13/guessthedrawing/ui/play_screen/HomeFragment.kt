@@ -26,9 +26,9 @@ class HomeFragment : Fragment(), IAnswerCheckView {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_play, container, false)
-        val button: Button = root.findViewById(R.id.TestButton)
-        val editText: EditText = root.findViewById(R.id.editTestText)
-        val imageView: ImageView = root.findViewById(R.id.TestImageView)
+        val button: Button = root.findViewById(R.id.btn_guess)
+        val editText: EditText = root.findViewById(R.id.et_answer)
+        val imageView: ImageView = root.findViewById(R.id.iv_picture)
 
         val testFixButton: Button = root.findViewById(R.id.TestFixButton)
 
@@ -42,7 +42,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                     imageView
                 )
             }
-
+            // очищает поле после ответа
+            editText.text.clear()
         }
 
         //TODO: кнопка Start при старте должна выполнять этот код

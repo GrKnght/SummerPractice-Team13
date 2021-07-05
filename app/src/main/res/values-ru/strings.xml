@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="store">Магазин</string>
+    <string name="settings">Настройки</string>
+    <string name="play">Игра</string>
+    <string name="time">Время</string>
+    <string name="_15sec">15сек</string>
+    <string name="guess">УГАДАТЬ!</string>
+    <string name="write_your_answer">напишите свой ответ</string>
+
+</resources>
