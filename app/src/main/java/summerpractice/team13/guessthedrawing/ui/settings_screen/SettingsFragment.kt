@@ -36,12 +36,12 @@ class SettingsFragment : Fragment(), ChangeTimeView {
 
         decreaseFB.setOnClickListener {
             changeTimePresenter.decrementTime()
-            model.text.setValue(changeTimePresenter.counter.toString() + "sec")
+            model.text.setValue(changeTimePresenter.counter.toString() + " sec")
 
         }
         increaseFB.setOnClickListener {
             changeTimePresenter.incrementTime()
-            model.text.setValue(changeTimePresenter.counter.toString() + "sec")
+            model.text.setValue(changeTimePresenter.counter.toString() + " sec")
 
         }
         val nameObserver = Observer<String> { newName ->

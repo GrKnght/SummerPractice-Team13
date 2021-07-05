@@ -3,4 +3,8 @@
     <string name="store">Store</string>
     <string name="settings">Settings</string>
     <string name="play">Play</string>
+    <string name="decrementfloatingbutton">decrement</string>
+    <string name="incrementfloatingbutton">increment</string>
+    <string name="_15sec">15 sec</string>
+    <string name="time">TIme</string>
 </resources>
