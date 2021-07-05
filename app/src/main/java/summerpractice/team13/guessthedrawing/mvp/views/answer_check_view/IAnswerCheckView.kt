@@ -1,4 +1,4 @@
-package summerpractice.team13.guessthedrawing.mvp.views.answerCheckView
+package summerpractice.team13.guessthedrawing.mvp.views.answer_check_view
 
 import android.content.Context
 

@@ -1,9 +1,9 @@
-package summerpractice.team13.guessthedrawing.mvp.presenters.answerCheckPresenter
+package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter
 
 import android.content.Context
 import android.widget.ImageView
 import summerpractice.team13.guessthedrawing.R
-import summerpractice.team13.guessthedrawing.mvp.views.answerCheckView.IAnswerCheckView
+import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswerCheckView
 
 class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAnswerCheckPresenter {
 
