@@ -13,13 +13,14 @@ import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
-import summerpractice.team13.guessthedrawing.mvp.presenters.ChangeTimePresenter
-import summerpractice.team13.guessthedrawing.mvp.views.ChangeTimeView
+import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.ChangeTimePresenter
+import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.IChangeTimePresenter
+import summerpractice.team13.guessthedrawing.mvp.views.IChangeTimeView
 
-class SettingsFragment : Fragment(), ChangeTimeView {
+class SettingsFragment : Fragment(), IChangeTimeView {
 
 
-    private lateinit var changeTimePresenter: ChangeTimePresenter
+    private lateinit var ichangeTimePresenter: IChangeTimePresenter
 
     private val model: SettingsViewModel by viewModels()
 
@@ -33,7 +34,7 @@ class SettingsFragment : Fragment(), ChangeTimeView {
 
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        changeTimePresenter = ChangeTimePresenter(this)
+        ichangeTimePresenter = ChangeTimePresenter(this)
 
         val increaseFB: FloatingActionButton = root.findViewById(R.id.incrementFB)
         val secondsTW: TextView = root.findViewById(R.id.secondsTW)
@@ -41,22 +42,21 @@ class SettingsFragment : Fragment(), ChangeTimeView {
         val testButton: Button = root.findViewById(R.id.testSharedButton)
         val testView: TextView = root.findViewById(R.id.testShared)
 
-
         val decreaseFB: FloatingActionButton = root.findViewById(R.id.decrementFB)
         decreaseFB.setOnClickListener {
-            changeTimePresenter.decrementTime()
-            model.text.setValue(changeTimePresenter.counter.toString() + " sec")
+            ichangeTimePresenter.decrementTime()
+            model.text.setValue(ichangeTimePresenter.i.toString() + " sec")
 
         }
         increaseFB.setOnClickListener {
-            changeTimePresenter.incrementTime()
-            model.text.value = changeTimePresenter.counter.toString() + " sec"
-            AppPreferences.time = changeTimePresenter.counter
+            ichangeTimePresenter.incrementTime()
+            model.text.value = ichangeTimePresenter.i.toString() + " sec"
+            AppPreferences.time = ichangeTimePresenter.i
 
         }
 
         testButton.setOnClickListener {
-            testView.text =  changeTimePresenter.counter.toString()
+            testView.text = ichangeTimePresenter.i.toString()
 
         }
         val nameObserver = Observer<String> { newName ->
@@ -69,13 +69,13 @@ class SettingsFragment : Fragment(), ChangeTimeView {
         return root
     }
 
-    override fun showToastDownBorder() {
-        val toast = Toast.makeText(context, "MIN", Toast.LENGTH_SHORT)
+    override fun showToastDownBorder(message: String) {
+        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
         toast.show()
     }
 
-    override fun showToastUpBorder() {
-        val toast = Toast.makeText(context, "MAX", Toast.LENGTH_SHORT)
+    override fun showToastUpBorder(message: String) {
+        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
         toast.show()
 
     }
