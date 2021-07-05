@@ -5,100 +5,53 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import summerpractice.team13.guessthedrawing.R
-/* PREVIOUS CODE */
-//import summerpractice.team13.guessthedrawing.mvp.presenters.AnswerCheckPresenter
-import summerpractice.team13.guessthedrawing.mvp.views.AnswerCheckView
+import summerpractice.team13.guessthedrawing.mvp.presenters.answerCheckPresenter.AnswerCheckPresenter
+import summerpractice.team13.guessthedrawing.mvp.presenters.answerCheckPresenter.IAnswerCheckPresenter
+import summerpractice.team13.guessthedrawing.mvp.views.answerCheckView.IAnswerCheckView
 
-class HomeFragment : Fragment(), AnswerCheckView {
+class HomeFragment : Fragment(), IAnswerCheckView {
 
-    //private lateinit var homeViewModel: HomeViewModel
-
-
-
-    /* PREVIOUS CODE */
-    //private lateinit var answerCheckPresenter: AnswerCheckPresenter
-
+    private lateinit var ianswerCheckPresenter: IAnswerCheckPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_play, container, false)
         val button: Button = root.findViewById(R.id.TestButton)
         val editText: EditText = root.findViewById(R.id.editTestText)
-        val imageView : ImageView = root.findViewById(R.id.TestImageView)
+        val imageView: ImageView = root.findViewById(R.id.TestImageView)
 
         val testFixButton: Button = root.findViewById(R.id.TestFixButton)
-        /* PREVIOUS CODE */
-        //answerCheckPresenter = AnswerCheckPresenter(this)
-//        button.setOnClickListener {
-//            context?.applicationContext?.let { it1 ->
-//                answerCheckPresenter.chekAnswer(
-//                    editText.text.toString(),
-//                    it1
-//                )
-//            }
-//
-//        }
 
-        //TODO: кнопка Start при старте должна выполнять этот код
-        testFixButton.setOnClickListener {
-            var rand = (0..maxDrawings).random()
-            imageView.setImageResource(cards[rand])
-            imageView.tag = cards[rand]
-        }
-
+        ianswerCheckPresenter = AnswerCheckPresenter(this)
         button.setOnClickListener {
             context?.applicationContext?.let { it1 ->
-                cheсkAnswer(
-                    editText.text.toString().toLowerCase(),
+                ianswerCheckPresenter.checkAnswer(
+                    editText.text.toString().lowercase(),
                     it1,
-                    resources.getResourceEntryName(getDrawableId(imageView)),
+                    resources.getResourceEntryName(ianswerCheckPresenter.getDrawableId(imageView)),
                     imageView
                 )
             }
+
         }
 
+        //TODO: кнопка Start при старте должна выполнять этот код
+        testFixButton.setOnClickListener {
+            ianswerCheckPresenter.getRandomPicture(imageView)
+
+        }
 
         return root
-    }
-
-    var cards= arrayOf(R.drawable.brain, R.drawable.beach, R.drawable.bread,
-        R.drawable.burger, R.drawable.calculator, R.drawable.castle,
-        R.drawable.clarinet, R.drawable.clock, R.drawable.compass,
-        R.drawable.cup, R.drawable.donut, R.drawable.dragon, R.drawable.ear,
-        R.drawable.elephant, R.drawable.fish, R.drawable.flower, R.drawable.frog,
-        R.drawable.headphones, R.drawable.helmet, R.drawable.key, R.drawable.mailbox,
-        R.drawable.mouse, R.drawable.mouth, R.drawable.parachute, R.drawable.parrot,
-        R.drawable.passport, R.drawable.pear, R.drawable.pencil, R.drawable.phone,
-        R.drawable.pillow, R.drawable.pizza, R.drawable.rainbow, R.drawable.saw,
-        R.drawable.shark, R.drawable.shovel, R.drawable.snowflake, R.drawable.sun,
-        R.drawable.tv, R.drawable.violin, R.drawable.watermelon)
-
-    private fun getDrawableId(iv: ImageView): Int {
-        return iv.tag as Int
-    }
-
-    // TODO: вернуть checkAnswer в отдельный класс.
-    // TODO: maxDrawings - это макс. возможное кол-во рисунков. Сделать его глобально доступным для settings.
-    var maxDrawings = 39
-    fun cheсkAnswer(answer: String, context: Context, imageName : String, imageView: ImageView) {
-        if (answer == imageName) {
-            showTrueIcon(context)
-            var n = (0..maxDrawings).random()
-            imageView.setImageResource(cards[n])
-            imageView.tag = cards[n]
-
-        } else {
-            showFalseIcon(context)
-        }
-
     }
 
     override fun showTrueIcon(context: Context) {
