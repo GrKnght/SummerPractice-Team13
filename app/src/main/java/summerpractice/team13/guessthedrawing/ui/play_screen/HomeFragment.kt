@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import summerpractice.team13.guessthedrawing.R
 /* PREVIOUS CODE */
@@ -37,6 +34,7 @@ class HomeFragment : Fragment(), AnswerCheckView {
         val editText: EditText = root.findViewById(R.id.editTestText)
         val imageView : ImageView = root.findViewById(R.id.TestImageView)
 
+        val testFixButton: Button = root.findViewById(R.id.TestFixButton)
         /* PREVIOUS CODE */
         //answerCheckPresenter = AnswerCheckPresenter(this)
 //        button.setOnClickListener {
@@ -49,12 +47,22 @@ class HomeFragment : Fragment(), AnswerCheckView {
 //
 //        }
 
+        //TODO: кнопка Start при старте должна выполнять этот код
+        testFixButton.setOnClickListener {
+            var rand = (0..maxDrawings).random()
+            imageView.setImageResource(cards[rand])
+            imageView.tag = cards[rand]
+        }
 
         button.setOnClickListener {
             context?.applicationContext?.let { it1 ->
-                cheсkAnswer(editText.text.toString(), it1, "Hello", imageView)
+                cheсkAnswer(
+                    editText.text.toString().toLowerCase(),
+                    it1,
+                    resources.getResourceEntryName(getDrawableId(imageView)),
+                    imageView
+                )
             }
-
         }
 
 
