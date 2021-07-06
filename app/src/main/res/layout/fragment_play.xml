@@ -20,7 +20,18 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/pictures" />
 
+    <Chronometer
+        android:id="@+id/view_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_indicator"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -101,5 +112,16 @@
         app:rippleColor="#33AAAAAA"
         app:strokeColor="@color/purple_500"
         app:strokeWidth="2dp" />
+
+    <TextView
+        android:id="@+id/testTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

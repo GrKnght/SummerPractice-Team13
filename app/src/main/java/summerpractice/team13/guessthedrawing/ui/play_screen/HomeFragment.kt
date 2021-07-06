@@ -1,15 +1,15 @@
 package summerpractice.team13.guessthedrawing.ui.play_screen
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.AnswerCheckPresenter
@@ -37,6 +37,10 @@ class HomeFragment : Fragment(), IAnswerCheckView {
 
         val testFixButton: Button = root.findViewById(R.id.TestFixButton)
 
+        val progressIndicator: LinearProgressIndicator = root.findViewById(R.id.progress_indicator)
+        val view_timer: Chronometer = root.findViewById(R.id.view_timer)
+        val testTextView:TextView= root.findViewById(R.id.testTextView)
+
         ianswerCheckPresenter = AnswerCheckPresenter(this)
         button.setOnClickListener {
             context?.applicationContext?.let { it1 ->
@@ -49,12 +53,31 @@ class HomeFragment : Fragment(), IAnswerCheckView {
             }
             // очищает поле после ответа
             editText.text.clear()
+
+
+            // TODO: globalTimer - ЭТО ТАЙМЕР, КОТОРЫЙ ДОЛЖЕН БЫТЬ ГЛОБАЛЬНО ДОСТУПНЫМ (+СОХРАНЯЕМЫМ)
+            var globalTimer: Int = 30;
+            // КОД ТАЙМЕРА
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                view_timer.isCountDown = true
+            }
+            view_timer.base = SystemClock.elapsedRealtime() + globalTimer * 1000
+            view_timer.start()
         }
 
-        //TODO: кнопка Start при старте должна выполнять этот код
+        // КОД ТАЙМЕРА
+        view_timer.setOnChronometerTickListener {
+            val elapsedMillis: Long = view_timer.base - SystemClock.elapsedRealtime()
+
+            testTextView.text = (elapsedMillis / 1000).toString()
+            progressIndicator.progress = (elapsedMillis / 1000).toInt()
+        }
+
+        //TODO: кнопка Start при старте должна выполнять 1-ую строку, кнопка Try Again - 2-ую
         testFixButton.setOnClickListener {
             ianswerCheckPresenter.getRandomPicture(imageView)
-
+            // ОСТАНАВЛИВАЕТ ТАЙМЕР
+            view_timer.stop()
         }
 
         return root
