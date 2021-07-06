@@ -21,10 +21,10 @@ class StoreFragment : Fragment() {
         storeViewModel =
             ViewModelProvider(this).get(StoreViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_store, container, false)
-        val textView: TextView = root.findViewById(R.id.text_store)
-        storeViewModel.text.observe(viewLifecycleOwner, {
-            textView.text = it
-        })
+        //val textView: TextView = root.findViewById(R.id.text_store)
+//        storeViewModel.text.observe(viewLifecycleOwner, {
+//            textView.text = it
+//        })
         return root
     }
 }
