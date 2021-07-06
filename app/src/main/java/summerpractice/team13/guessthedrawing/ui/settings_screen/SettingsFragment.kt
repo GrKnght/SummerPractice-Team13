@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputLayout
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.ChangeTimePresenter
@@ -32,6 +31,14 @@ class SettingsFragment : Fragment(), IChangeTimeView {
         context?.let { AppPreferences.init(it) }
 
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
+
+
+        // Расписан ArrayAdapter для dropdown menu сложности
+        val difficulties = resources.getStringArray(R.array.difficultyLevels)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, difficulties)
+        val textField: TextInputLayout = root.findViewById(R.id.textField)
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, difficulties)
+        (textField.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
         ichangeTimePresenter = ChangeTimePresenter(this)
 

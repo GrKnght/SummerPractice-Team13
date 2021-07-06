@@ -54,15 +54,13 @@ class HomeFragment : Fragment(), IAnswerCheckView {
             // очищает поле после ответа
             editText.text.clear()
 
-
-            // TODO: globalTimer - ЭТО ТАЙМЕР, КОТОРЫЙ ДОЛЖЕН БЫТЬ ГЛОБАЛЬНО ДОСТУПНЫМ (+СОХРАНЯЕМЫМ)
-            var globalTimer: Int = 30;
             // КОД ТАЙМЕРА
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 view_timer.isCountDown = true
             }
-            view_timer.base = SystemClock.elapsedRealtime() + globalTimer * 1000
+            view_timer.base = SystemClock.elapsedRealtime() + AppPreferences.time * 1000
             view_timer.start()
+            progressIndicator.max = AppPreferences.time
         }
 
         // КОД ТАЙМЕРА

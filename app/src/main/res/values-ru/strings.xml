@@ -7,5 +7,8 @@
     <string name="_15sec">15сек</string>
     <string name="guess">УГАДАТЬ!</string>
     <string name="write_your_answer">напишите свой ответ</string>
+    <string name="music_volume">Громкость музыки</string>
+    <string name="effects_volume">Громкость эффектов</string>
+    <string name="difficult_levels">Уровень сложности</string>
 
 </resources>
