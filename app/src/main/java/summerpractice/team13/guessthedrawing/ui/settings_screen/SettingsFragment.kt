@@ -45,18 +45,25 @@ class SettingsFragment : Fragment(), IChangeTimeView {
 
         decreaseFB.setOnClickListener {
             ichangeTimePresenter.decrementTime()
-            model.text.setValue(ichangeTimePresenter.i.toString() + " sec")
+            model.text.value = ichangeTimePresenter.i.toString() + " sec"
+            // записываю в память зеачение времени
+            AppPreferences.time = ichangeTimePresenter.i
+
 
         }
         increaseFB.setOnClickListener {
             ichangeTimePresenter.incrementTime()
             model.text.value = ichangeTimePresenter.i.toString() + " sec"
+            // записываю в память зеачение времени
             AppPreferences.time = ichangeTimePresenter.i
+
+
 
         }
 
         testButton.setOnClickListener {
-            testView.text = ichangeTimePresenter.i.toString()
+            // беру из памяти значение и передаю в textView (чтобы взять нужно AppPreferences.time)
+            testView.text = AppPreferences.time.toString()
 
         }
         val nameObserver = Observer<String> { newName ->

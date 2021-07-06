@@ -7,7 +7,6 @@ import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswer
 
 class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAnswerCheckPresenter {
 
-    // TODO: maxDrawings - это макс. возможное кол-во рисунков. Сделать его глобально доступным для settings.
     private var maxDrawings = 39
 
     private var cards = arrayOf(

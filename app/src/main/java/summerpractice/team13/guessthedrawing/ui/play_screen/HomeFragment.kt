@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import summerpractice.team13.guessthedrawing.R
+import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.AnswerCheckPresenter
 import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.IAnswerCheckPresenter
 import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswerCheckView
@@ -18,14 +19,18 @@ import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswer
 class HomeFragment : Fragment(), IAnswerCheckView {
 
     private lateinit var ianswerCheckPresenter: IAnswerCheckPresenter
+    private lateinit var root: View
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        val root = inflater.inflate(R.layout.fragment_play, container, false)
+        context?.let { AppPreferences.init(it) }
+
+        root = inflater.inflate(R.layout.fragment_play, container, false)
         val button: Button = root.findViewById(R.id.btn_guess)
         val editText: EditText = root.findViewById(R.id.et_answer)
         val imageView: ImageView = root.findViewById(R.id.iv_picture)
@@ -57,6 +62,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
 
     override fun showTrueIcon(context: Context) {
         val inflater = layoutInflater
+
         val views = inflater.inflate(R.layout.green_toast_item, null)
         val toast = Toast(context)
         toast.duration = Toast.LENGTH_SHORT
@@ -68,6 +74,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
 
     override fun showFalseIcon(context: Context) {
         val inflater = layoutInflater
+
         val views = inflater.inflate(R.layout.red_toast_item, null)
         val toast = Toast(context)
         toast.duration = Toast.LENGTH_SHORT
