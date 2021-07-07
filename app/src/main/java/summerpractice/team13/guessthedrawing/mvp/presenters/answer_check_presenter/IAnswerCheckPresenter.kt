@@ -1,6 +1,7 @@
 package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter
 
 import android.content.Context
+import android.widget.Button
 import android.widget.Chronometer
 import android.widget.EditText
 import android.widget.ImageView
@@ -15,7 +16,8 @@ interface IAnswerCheckPresenter {
         imageView: ImageView,
         editText: EditText,
         chronometer: Chronometer,
-        progressIndicator: LinearProgressIndicator
+        progressIndicator: LinearProgressIndicator,
+        button: Button
     )
 
     fun getDrawableId(imageView: ImageView): Int

@@ -18,6 +18,7 @@
     <string name="difficult_level">Difficult Levels</string>
     <string name="try_again">TRY AGAIN!</string>
     <string name="start">START!</string>
+    <string name="normal" translatable="false">normal</string>
     <string-array name="difficultyLevels">
         <item>Easy</item>
         <item>Normal</item>

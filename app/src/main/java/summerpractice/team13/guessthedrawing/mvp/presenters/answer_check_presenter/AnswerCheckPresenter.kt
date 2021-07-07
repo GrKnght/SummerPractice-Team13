@@ -1,7 +1,9 @@
 package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter
 
 import android.content.Context
+import android.os.Handler
 import android.os.SystemClock
+import android.widget.Button
 import android.widget.Chronometer
 import android.widget.EditText
 import android.widget.ImageView
@@ -35,19 +37,32 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
         imageView: ImageView,
         editText: EditText,
         chronometer: Chronometer,
-        progressIndicator:LinearProgressIndicator
+        progressIndicator:LinearProgressIndicator,
+        button: Button
     ) {
         if (answer == imageName) {
             IAnswerCheckView.showTrueIcon(context)
-            getRandomPicture(imageView)
 
-            // Запускает хронометер заново в случае правильного ответа
-            chronometer.base = SystemClock.elapsedRealtime() + AppPreferences.time * 1000
-            chronometer.start()
-            progressIndicator.max = AppPreferences.time
+            // останавливаем таймер, выключаем кнопки перед задержкой
+            chronometer.stop()
+            editText.isEnabled = false
+            button.isClickable = false
+            val handler = Handler()
+            handler.postDelayed(Runnable {
+                // обратно всё включаем после задержки
+                editText.isEnabled = true
+                button.isClickable = true
 
-            // Очищает поле после правильного ответа
-            editText.text.clear()
+                getRandomPicture(imageView)
+
+                // Запускает хронометер заново в случае правильного ответа
+                chronometer.base = SystemClock.elapsedRealtime() + AppPreferences.time * 1000
+                chronometer.start()
+                progressIndicator.max = AppPreferences.time
+
+                // Очищает поле после правильного ответа
+                editText.text.clear()
+            }, 2500)
 
         } else {
             IAnswerCheckView.showFalseIcon(context)

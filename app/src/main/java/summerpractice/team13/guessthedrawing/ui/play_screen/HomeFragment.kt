@@ -3,6 +3,7 @@ package summerpractice.team13.guessthedrawing.ui.play_screen
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +45,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         val progressIndicator: LinearProgressIndicator = root.findViewById(R.id.progress_indicator)
         val chronometer: Chronometer = root.findViewById(R.id.chronometer)
         val universalButton: Button = root.findViewById(R.id.btn_universal)
-        val coinImageView:ImageView = root.findViewById(R.id.iv_coin)
+        val coinImageView: ImageView = root.findViewById(R.id.iv_coin)
         val testTextView: TextView = root.findViewById(R.id.testTextView)
         val mainSeparator: View = root.findViewById(R.id.separator_main)
 
@@ -84,7 +85,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                     pictureImageView,
                     answerEditText,
                     chronometer,
-                    progressIndicator
+                    progressIndicator,
+                    guessButton
                 )
             }
 
@@ -100,21 +102,28 @@ class HomeFragment : Fragment(), IAnswerCheckView {
             progressIndicator.progress = (elapsedMillis / 1000).toInt()
 
             if (progressIndicator.progress <= 0) {
-                elementsNotVisible(
-                    guessButton,
-                    answerEditText,
-                    answerTextInput,
-                    pictureImageView,
-                    progressIndicator,
-                    testTextView,
-                    universalButton,
-                    mainSeparator,
-                    coinImageView
-                )
-                // меняет текст кнопки "Start"
-                universalButton.text = getString(R.string.try_again)
                 // останавливает хронометер
                 chronometer.stop()
+
+                // задержка в 1 секунду
+                val handler = Handler()
+                handler.postDelayed(Runnable {
+
+                    elementsNotVisible(
+                        guessButton,
+                        answerEditText,
+                        answerTextInput,
+                        pictureImageView,
+                        progressIndicator,
+                        testTextView,
+                        universalButton,
+                        mainSeparator,
+                        coinImageView
+                    )
+                    // меняет текст кнопки "Start"
+                    universalButton.text = getString(R.string.try_again)
+
+                }, 1000)
             }
         }
 
@@ -155,7 +164,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         testTextView: TextView,
         testFixButton: Button,
         mainSeparator: View,
-        coinImageView:ImageView
+        coinImageView: ImageView
     ) {
 
         guessButton.isVisible = true
@@ -165,7 +174,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         progressIndicator.isVisible = true
         testTextView.isVisible = true
         mainSeparator.isVisible = true
-        coinImageView.isVisible=true
+        coinImageView.isVisible = true
 
         testFixButton.isVisible = false
     }

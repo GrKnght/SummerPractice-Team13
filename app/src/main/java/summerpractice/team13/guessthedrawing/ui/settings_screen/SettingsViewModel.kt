@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 class SettingsViewModel : ViewModel() {
 
 
-    val text: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    val value: MutableLiveData<Float> by lazy {
+        MutableLiveData<Float>()
     }
 
 

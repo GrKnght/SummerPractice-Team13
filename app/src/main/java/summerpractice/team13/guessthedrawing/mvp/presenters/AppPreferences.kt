@@ -27,4 +27,20 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putInt("temp", value)
         }
+
+    var mode: String?
+        get() = preferences.getString("mode", "Easy")
+        set(value) = preferences.edit {
+            it.putString("mode", value)
+        }
+    var sliderMusicValue: Float?
+        get() = preferences.getFloat("sliderMusicValue", 50.0F)
+        set(value) = preferences.edit {
+            it.putFloat("sliderMusicValue", value!!)
+        }
+    var sliderEffectsValue: Float?
+        get() = preferences.getFloat("sliderEffectsValue", 50.0F)
+        set(value) = preferences.edit {
+            it.putFloat("sliderEffectsValue", value!!)
+        }
 }
