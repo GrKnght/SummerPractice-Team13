@@ -15,7 +15,7 @@ import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.ChangeTimePresenter
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.IChangeTimePresenter
-import summerpractice.team13.guessthedrawing.mvp.views.IChangeTimeView
+import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeTimeView
 
 
 class SettingsFragment : Fragment(), IChangeTimeView {
