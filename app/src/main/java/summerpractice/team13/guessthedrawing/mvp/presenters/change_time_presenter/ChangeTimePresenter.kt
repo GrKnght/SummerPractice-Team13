@@ -1,13 +1,10 @@
 package summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter
 
-import summerpractice.team13.guessthedrawing.mvp.views.IChangeTimeView
+import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeTimeView
 
 var counter = 15
 
-class ChangeTimePresenter(
-    private var ichangeTimeView: IChangeTimeView,
-    override var i: Int = counter
-) : IChangeTimePresenter {
+class ChangeTimePresenter(private var ichangeTimeView: IChangeTimeView, override var i: Int = counter) : IChangeTimePresenter {
 
     override fun incrementTime() {
         i += 1
