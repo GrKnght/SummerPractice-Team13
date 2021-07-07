@@ -32,7 +32,6 @@ class SettingsFragment : Fragment(), IChangeTimeView {
 
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
-
         // Расписан ArrayAdapter для dropdown menu
         val difficulties = resources.getStringArray(R.array.difficultyLevels)
         val textField: TextInputLayout = root.findViewById(R.id.textField)
