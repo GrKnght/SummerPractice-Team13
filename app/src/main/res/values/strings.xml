@@ -16,9 +16,13 @@
     <string name="music_volume">music volume</string>
     <string name="effects_volume">effects volume</string>
     <string name="difficult_level">difficult level</string>
+    <string name="normal" translatable="false">Normal</string>
+
     <string-array name="difficultyLevels">
         <item>Easy</item>
         <item>Normal</item>
         <item>Hard</item>
     </string-array>
+
+
 </resources>

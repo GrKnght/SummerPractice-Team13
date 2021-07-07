@@ -2,7 +2,7 @@ package summerpractice.team13.guessthedrawing.mvp.presenters.change_time_present
 
 import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeTimeView
 
-var counter = 15
+var counter = 20
 
 class ChangeTimePresenter(private var ichangeTimeView: IChangeTimeView, override var i: Int = counter) : IChangeTimePresenter {
 
