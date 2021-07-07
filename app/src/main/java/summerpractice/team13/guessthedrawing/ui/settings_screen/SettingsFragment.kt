@@ -1,6 +1,7 @@
 package summerpractice.team13.guessthedrawing.ui.settings_screen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,33 +9,33 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+
 import com.google.android.material.textfield.TextInputLayout
+
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.databinding.FragmentSettingsBinding
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
-import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.IChangeTimePresenter
-import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeTimeView
+import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.ChangeDifficultyPresenter
+import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.IChangeDifficultyPresenter
+import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
 
-class SettingsFragment : Fragment(), IChangeTimeView {
+class SettingsFragment : Fragment(), IChangeDifficultyView {
 
-    private lateinit var ichangeTimePresenter: IChangeTimePresenter
-
-
+    private lateinit var ichangeDifficultyPresenter: IChangeDifficultyPresenter
     private lateinit var autoCompleteTextView: AutoCompleteTextView
     private lateinit var arrayAdapter: ArrayAdapter<String>
+    private lateinit var textField: TextInputLayout
 
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onResume() {
         super.onResume()
-
         val difficulties = resources.getStringArray(R.array.difficultyLevels)
         arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, difficulties)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
-
+        Log.d("Test", "CalledResume")
 
     }
 
@@ -45,62 +46,68 @@ class SettingsFragment : Fragment(), IChangeTimeView {
     ): View {
 
         context?.let { AppPreferences.init(it) }
-
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-
-        val testButton = binding.testSharedButton
-        val testView = binding.testShared
+        ichangeDifficultyPresenter = ChangeDifficultyPresenter(this)
 
         val view = binding.root
 
+        textField = binding.textField
 
-        val textField: TextInputLayout = binding.textField
+        val sliderMusic = binding.sliderMusic
+
+        val tw = binding.testTW
 
         autoCompleteTextView = textField.editText as AutoCompleteTextView
 
-
+        autoCompleteTextView.setText(AppPreferences.mode) // default Easy
 
         autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
-            when (position) {
-                0 -> {
-                    AppPreferences.time = 15
-                    testView.text = AppPreferences.time.toString()
-
-                }
-                1 -> {
-                    AppPreferences.time = 20
-                    testView.text = AppPreferences.time.toString()
-
-                }
-                2 -> {
-                    AppPreferences.time = 25
-                    testView.text = AppPreferences.time.toString()
-                }
-            }
+            ichangeDifficultyPresenter.switchDifficulty(position)
 
 
         }
 
 
-
-
         return view
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        Log.d("Test", "CalledOnDestroyView")
+
     }
 
-    override fun showToastDownBorder(message: String) {
+    override fun showTimeToast(message: String) {
         val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
         toast.show()
     }
 
-    override fun showToastUpBorder(message: String) {
-        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-        toast.show()
+
+    // Для дебага
+    override fun onPause() {
+        super.onPause()
+        Log.d("Test", "CalledOnPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("Test", "CalledOnStop")
 
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("Test", "CalledOnDestroy")
+
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("Test", "CalledOnDetach")
+
+    }
+
 
 }
