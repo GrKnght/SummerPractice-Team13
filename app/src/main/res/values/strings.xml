@@ -15,7 +15,9 @@
     <string name="pictures" translatable="false">Pictures</string>
     <string name="music_volume">Music volume</string>
     <string name="effects_volume">Effects volume</string>
-    <string name="difficult_levels">Difficult Levels</string>
+    <string name="difficult_level">Difficult Levels</string>
+    <string name="try_again">TRY AGAIN!</string>
+    <string name="start">START!</string>
     <string-array name="difficultyLevels">
         <item>Easy</item>
         <item>Normal</item>

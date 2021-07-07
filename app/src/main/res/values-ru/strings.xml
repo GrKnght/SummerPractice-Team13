@@ -9,7 +9,9 @@
     <string name="write_your_answer">напишите свой ответ</string>
     <string name="music_volume">Громкость музыки</string>
     <string name="effects_volume">Громкость эффектов</string>
-    <string name="difficult_levels">Уровень сложности</string>
+    <string name="difficult_level">Уровень сложности</string>
+    <string name="try_again">ПОПРОБУЙ ЕЩЁ РАЗ!</string>
+    <string name="start">НАЧАТЬ!</string>
     <string-array name="difficultyLevels">
         <item>Легкий</item>
         <item>Обычный</item>
