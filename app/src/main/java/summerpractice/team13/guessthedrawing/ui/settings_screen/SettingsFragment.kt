@@ -33,9 +33,8 @@ class SettingsFragment : Fragment(), IChangeTimeView {
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
 
-        // Расписан ArrayAdapter для dropdown menu сложности
+        // Расписан ArrayAdapter для dropdown menu
         val difficulties = resources.getStringArray(R.array.difficultyLevels)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, difficulties)
         val textField: TextInputLayout = root.findViewById(R.id.textField)
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, difficulties)
         (textField.editText as? AutoCompleteTextView)?.setAdapter(adapter)
