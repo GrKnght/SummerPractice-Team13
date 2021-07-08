@@ -212,31 +212,6 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         testFixButton.isVisible = true
     }
 
-    override fun onPause() {
-        super.onPause()
-        println("from onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        println("from onStop")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        println("from onDestroyView")
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        println("from onDestroy")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        println("from onDetach")
-    }
 
     override fun showTrueIcon(context: Context) {
         val inflater = layoutInflater

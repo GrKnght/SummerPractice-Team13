@@ -48,7 +48,7 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
             editText.isEnabled = false
             button.isClickable = false
             val handler = Handler()
-            handler.postDelayed(Runnable {
+            handler.postDelayed({
                 // обратно всё включаем после задержки
                 editText.isEnabled = true
                 button.isClickable = true

@@ -15,8 +15,8 @@ import com.google.android.material.textfield.TextInputLayout
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.databinding.FragmentSettingsBinding
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
-import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.ChangeDifficultyPresenter
-import summerpractice.team13.guessthedrawing.mvp.presenters.change_time_presenter.IChangeDifficultyPresenter
+import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.ChangeDifficultyPresenter
+import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.IChangeDifficultyPresenter
 import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
 
 class SettingsFragment : Fragment(), IChangeDifficultyView {
@@ -25,7 +25,6 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
     private lateinit var autoCompleteTextView: AutoCompleteTextView
     private lateinit var arrayAdapter: ArrayAdapter<String>
     private lateinit var textField: TextInputLayout
-
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
@@ -53,9 +52,7 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
 
         textField = binding.textField
 
-        val sliderMusic = binding.sliderMusic
-
-        val tw = binding.testTW
+        //val sliderMusic = binding.sliderMusic
 
         autoCompleteTextView = textField.editText as AutoCompleteTextView
 
@@ -82,31 +79,6 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
     override fun showTimeToast(message: String) {
         val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
         toast.show()
-    }
-
-
-    // Для дебага
-    override fun onPause() {
-        super.onPause()
-        Log.d("Test", "CalledOnPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("Test", "CalledOnStop")
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("Test", "CalledOnDestroy")
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("Test", "CalledOnDetach")
-
     }
 
 
