@@ -43,4 +43,9 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putFloat("sliderEffectsValue", value!!)
         }
+    var coins: Int?
+        get() = preferences.getInt("coin", 0)
+        set(value) = preferences.edit {
+            it.putInt("coin", value!!)
+        }
 }

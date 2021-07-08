@@ -3,10 +3,7 @@ package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presen
 import android.content.Context
 import android.os.Handler
 import android.os.SystemClock
-import android.widget.Button
-import android.widget.Chronometer
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.*
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
@@ -37,11 +34,14 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
         imageView: ImageView,
         editText: EditText,
         chronometer: Chronometer,
-        progressIndicator:LinearProgressIndicator,
-        button: Button
+        progressIndicator: LinearProgressIndicator,
+        button: Button,
+        coins: TextView
     ) {
         if (answer == imageName) {
             IAnswerCheckView.showTrueIcon(context)
+            AppPreferences.coins = AppPreferences.coins?.plus(1)
+            coins.text = AppPreferences.coins.toString()
 
             // останавливаем таймер, выключаем кнопки перед задержкой
             chronometer.stop()
@@ -62,7 +62,7 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
 
                 // Очищает поле после правильного ответа
                 editText.text.clear()
-            }, 2500)
+            }, 1600)
 
         } else {
             IAnswerCheckView.showFalseIcon(context)

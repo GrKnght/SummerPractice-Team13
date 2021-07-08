@@ -26,7 +26,6 @@ class HomeFragment : Fragment(), IAnswerCheckView {
     private lateinit var ianswerCheckPresenter: IAnswerCheckPresenter
     private lateinit var root: View
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +37,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         root = inflater.inflate(R.layout.fragment_play, container, false)
 
         // Values
+        val coins: TextView = root.findViewById(R.id.coinTV)
         val guessButton: Button = root.findViewById(R.id.btn_guess)
         val answerEditText: EditText = root.findViewById(R.id.et_answer)
         val answerTextInput: TextInputLayout = root.findViewById(R.id.ti_answer)
@@ -59,14 +59,15 @@ class HomeFragment : Fragment(), IAnswerCheckView {
             testTextView,
             universalButton,
             mainSeparator,
-            coinImageView
+            coinImageView,
+            coins
         )
 
         // По нажатию кнопки на клавиатуре автоматически нажимается кнопка "Guess"
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 guessButton.performClick()
-                true
+
             }
             false
         }
@@ -86,7 +87,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                     answerEditText,
                     chronometer,
                     progressIndicator,
-                    guessButton
+                    guessButton,
+                    coins
                 )
             }
 
@@ -107,7 +109,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
 
                 // задержка в 1 секунду
                 val handler = Handler()
-                handler.postDelayed(Runnable {
+                handler.postDelayed({
 
                     elementsNotVisible(
                         guessButton,
@@ -118,7 +120,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                         testTextView,
                         universalButton,
                         mainSeparator,
-                        coinImageView
+                        coinImageView,
+                        coins
                     )
                     // меняет текст кнопки "Start"
                     universalButton.text = getString(R.string.try_again)
@@ -137,7 +140,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                 testTextView,
                 universalButton,
                 mainSeparator,
-                coinImageView
+                coinImageView,
+                coins
             )
 
             // Показывает рандомный рисунок
@@ -164,7 +168,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         testTextView: TextView,
         testFixButton: Button,
         mainSeparator: View,
-        coinImageView: ImageView
+        coinImageView: ImageView,
+        coins: TextView
     ) {
 
         guessButton.isVisible = true
@@ -175,6 +180,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         testTextView.isVisible = true
         mainSeparator.isVisible = true
         coinImageView.isVisible = true
+        coins.isVisible = true
 
         testFixButton.isVisible = false
     }
@@ -188,7 +194,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         testTextView: TextView,
         testFixButton: Button,
         mainSeparator: View,
-        coinImageView: ImageView
+        coinImageView: ImageView,
+        coins: TextView
     ) {
 
         guessButton.isVisible = false
@@ -199,6 +206,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         testTextView.isVisible = false
         mainSeparator.isVisible = false
         coinImageView.isVisible = false
+        coins.isVisible = false
+
 
         testFixButton.isVisible = true
     }
