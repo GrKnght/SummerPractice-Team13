@@ -1,17 +1,41 @@
 package summerpractice.team13.guessthedrawing
 
+import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Spy
+import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.stubbing.OngoingStubbing
+import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
+import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.ChangeDifficultyPresenter
+import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
 
-import org.junit.Assert.*
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
+@RunWith(MockitoJUnitRunner::class)
 class ExampleUnitTest {
-    @Test
+
+    @Mock
+    private lateinit var view: IChangeDifficultyView
+
+    @Spy
+    private lateinit var presenter: ChangeDifficultyPresenter
+
+
+    @Before
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        presenter = ChangeDifficultyPresenter(view)
+
+        
+    }
+
+    @Test
+    fun test1(){
+
+        Mockito.`when`(presenter.switchDifficulty(1))
+
+
+
     }
 }
+

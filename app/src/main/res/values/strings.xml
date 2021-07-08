@@ -12,7 +12,7 @@
     <string name="_15sec">15sec</string>
     <string name="guess">GUESS!</string>
     <string name="write_your_answer">write your answer</string>
-    <string name="pictures" translatable="false">Pictures</string>
+    <string name="pictures">Pictures</string>
 
     <string name="music_volume">Music volume</string>
     <string name="effects_volume">Effects volume</string>

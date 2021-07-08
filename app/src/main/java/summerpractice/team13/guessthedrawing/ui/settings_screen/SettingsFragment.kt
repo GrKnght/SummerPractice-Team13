@@ -46,6 +46,8 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
 
         context?.let { AppPreferences.init(it) }
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+
+
         ichangeDifficultyPresenter = ChangeDifficultyPresenter(this)
 
         val view = binding.root

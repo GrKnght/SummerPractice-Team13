@@ -18,12 +18,9 @@ object AppPreferences {
         editor.apply()
     }
 
-    // Saving Time in settings to SharedPreferences
-    // getter and setter with Shared Preference
+
     var time: Int
-        // custom getter to get a preference of a desired type, with a predefined default value
         get() = preferences.getInt("temp", 15)
-        // custom setter to save a preference back to preferences file
         set(value) = preferences.edit {
             it.putInt("temp", value)
         }

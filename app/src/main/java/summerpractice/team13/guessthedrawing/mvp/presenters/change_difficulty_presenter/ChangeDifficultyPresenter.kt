@@ -3,8 +3,9 @@ package summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_p
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
 
-class ChangeDifficultyPresenter(private var iChangeDifficultyView: IChangeDifficultyView) :
-    IChangeDifficultyPresenter {
+class ChangeDifficultyPresenter(private var iChangeDifficultyView: IChangeDifficultyView) : IChangeDifficultyPresenter {
+
+
     override fun switchDifficulty(position: Int) {
         when (position) {
             0 -> {
