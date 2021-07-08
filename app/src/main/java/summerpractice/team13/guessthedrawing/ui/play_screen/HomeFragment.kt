@@ -3,18 +3,23 @@ package summerpractice.team13.guessthedrawing.ui.play_screen
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.android.material.textfield.TextInputLayout
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.AnswerCheckPresenter
 import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.IAnswerCheckPresenter
 import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswerCheckView
+
 
 class HomeFragment : Fragment(), IAnswerCheckView {
 
@@ -31,54 +36,197 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         context?.let { AppPreferences.init(it) }
 
         root = inflater.inflate(R.layout.fragment_play, container, false)
-        val button: Button = root.findViewById(R.id.btn_guess)
-        val editText: EditText = root.findViewById(R.id.et_answer)
-        val imageView: ImageView = root.findViewById(R.id.iv_picture)
 
-        val testFixButton: Button = root.findViewById(R.id.TestFixButton)
-
+        // Values
+        val guessButton: Button = root.findViewById(R.id.btn_guess)
+        val answerEditText: EditText = root.findViewById(R.id.et_answer)
+        val answerTextInput: TextInputLayout = root.findViewById(R.id.ti_answer)
+        val pictureImageView: ImageView = root.findViewById(R.id.iv_picture)
         val progressIndicator: LinearProgressIndicator = root.findViewById(R.id.progress_indicator)
-        val view_timer: Chronometer = root.findViewById(R.id.view_timer)
-        val testTextView:TextView= root.findViewById(R.id.testTextView)
+        val chronometer: Chronometer = root.findViewById(R.id.chronometer)
+        val universalButton: Button = root.findViewById(R.id.btn_universal)
+        val coinImageView: ImageView = root.findViewById(R.id.iv_coin)
+        val testTextView: TextView = root.findViewById(R.id.testTextView)
+        val mainSeparator: View = root.findViewById(R.id.separator_main)
 
-        ianswerCheckPresenter = AnswerCheckPresenter(this)
-        button.setOnClickListener {
-            context?.applicationContext?.let { it1 ->
-                ianswerCheckPresenter.checkAnswer(
-                    editText.text.toString().lowercase(),
-                    it1,
-                    resources.getResourceEntryName(ianswerCheckPresenter.getDrawableId(imageView)),
-                    imageView
-                )
-            }
-            // очищает поле после ответа
-            editText.text.clear()
+        // Default
+        elementsNotVisible(
+            guessButton,
+            answerEditText,
+            answerTextInput,
+            pictureImageView,
+            progressIndicator,
+            testTextView,
+            universalButton,
+            mainSeparator,
+            coinImageView
+        )
 
-            // КОД ТАЙМЕРА
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                view_timer.isCountDown = true
+        // По нажатию кнопки на клавиатуре автоматически нажимается кнопка "Guess"
+        answerEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                guessButton.performClick()
+                true
             }
-            view_timer.base = SystemClock.elapsedRealtime() + AppPreferences.time * 1000
-            view_timer.start()
-            progressIndicator.max = AppPreferences.time
+            false
         }
 
-        // КОД ТАЙМЕРА
-        view_timer.setOnChronometerTickListener {
-            val elapsedMillis: Long = view_timer.base - SystemClock.elapsedRealtime()
+        ianswerCheckPresenter = AnswerCheckPresenter(this)
+        guessButton.setOnClickListener {
+            context?.applicationContext?.let { it1 ->
+                ianswerCheckPresenter.checkAnswer(
+                    it1,
+                    answerEditText.text.toString().lowercase(),
+                    resources.getResourceEntryName(
+                        ianswerCheckPresenter.getDrawableId(
+                            pictureImageView
+                        )
+                    ),
+                    pictureImageView,
+                    answerEditText,
+                    chronometer,
+                    progressIndicator,
+                    guessButton
+                )
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                chronometer.isCountDown = true
+            }
+        }
+
+        chronometer.setOnChronometerTickListener {
+            val elapsedMillis: Long = chronometer.base - SystemClock.elapsedRealtime()
 
             testTextView.text = (elapsedMillis / 1000).toString()
             progressIndicator.progress = (elapsedMillis / 1000).toInt()
+
+            if (progressIndicator.progress <= 0) {
+                // останавливает хронометер
+                chronometer.stop()
+
+                // задержка в 1 секунду
+                val handler = Handler()
+                handler.postDelayed(Runnable {
+
+                    elementsNotVisible(
+                        guessButton,
+                        answerEditText,
+                        answerTextInput,
+                        pictureImageView,
+                        progressIndicator,
+                        testTextView,
+                        universalButton,
+                        mainSeparator,
+                        coinImageView
+                    )
+                    // меняет текст кнопки "Start"
+                    universalButton.text = getString(R.string.try_again)
+
+                }, 1000)
+            }
         }
 
-        //TODO: кнопка Start при старте должна выполнять 1-ую строку, кнопка Try Again - 2-ую
-        testFixButton.setOnClickListener {
-            ianswerCheckPresenter.getRandomPicture(imageView)
-            // ОСТАНАВЛИВАЕТ ТАЙМЕР
-            view_timer.stop()
+        universalButton.setOnClickListener {
+            elementsVisible(
+                guessButton,
+                answerEditText,
+                answerTextInput,
+                pictureImageView,
+                progressIndicator,
+                testTextView,
+                universalButton,
+                mainSeparator,
+                coinImageView
+            )
+
+            // Показывает рандомный рисунок
+            ianswerCheckPresenter.getRandomPicture(pictureImageView)
+
+            // Запускает хронометер
+            chronometer.base = SystemClock.elapsedRealtime() + AppPreferences.time * 1000
+            chronometer.start()
+            progressIndicator.max = AppPreferences.time
+
+            // Очищает поле
+            answerEditText.text.clear()
         }
 
         return root
+    }
+
+    private fun elementsVisible(
+        guessButton: Button,
+        answerEditText: EditText,
+        answerTextInput: TextInputLayout,
+        pictureImageView: ImageView,
+        progressIndicator: LinearProgressIndicator,
+        testTextView: TextView,
+        testFixButton: Button,
+        mainSeparator: View,
+        coinImageView: ImageView
+    ) {
+
+        guessButton.isVisible = true
+        answerEditText.isVisible = true
+        answerTextInput.isVisible = true
+        pictureImageView.isVisible = true
+        progressIndicator.isVisible = true
+        testTextView.isVisible = true
+        mainSeparator.isVisible = true
+        coinImageView.isVisible = true
+
+        testFixButton.isVisible = false
+    }
+
+    private fun elementsNotVisible(
+        guessButton: Button,
+        answerEditText: EditText,
+        answerTextInput: TextInputLayout,
+        pictureImageView: ImageView,
+        progressIndicator: LinearProgressIndicator,
+        testTextView: TextView,
+        testFixButton: Button,
+        mainSeparator: View,
+        coinImageView: ImageView
+    ) {
+
+        guessButton.isVisible = false
+        answerEditText.isVisible = false
+        answerTextInput.isVisible = false
+        pictureImageView.isVisible = false
+        progressIndicator.isVisible = false
+        testTextView.isVisible = false
+        mainSeparator.isVisible = false
+        coinImageView.isVisible = false
+
+        testFixButton.isVisible = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        println("from onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        println("from onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        println("from onDestroyView")
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("from onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        println("from onDetach")
     }
 
     override fun showTrueIcon(context: Context) {

@@ -13,10 +13,13 @@
     <string name="guess">GUESS!</string>
     <string name="write_your_answer">write your answer</string>
     <string name="pictures" translatable="false">Pictures</string>
-    <string name="music_volume">music volume</string>
-    <string name="effects_volume">effects volume</string>
-    <string name="difficult_level">difficult level</string>
-    <string name="normal" translatable="false">Normal</string>
+
+    <string name="music_volume">Music volume</string>
+    <string name="effects_volume">Effects volume</string>
+    <string name="difficult_level">Difficult Levels</string>
+    <string name="try_again">TRY AGAIN!</string>
+    <string name="start">START!</string>
+    <string name="normal" translatable="false">normal</string>
 
     <string-array name="difficultyLevels">
         <item>Easy</item>

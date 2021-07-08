@@ -1,8 +1,15 @@
 package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter
 
 import android.content.Context
+import android.os.Handler
+import android.os.SystemClock
+import android.widget.Button
+import android.widget.Chronometer
+import android.widget.EditText
 import android.widget.ImageView
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import summerpractice.team13.guessthedrawing.R
+import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswerCheckView
 
 class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAnswerCheckPresenter {
@@ -24,22 +31,42 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
     )
 
     override fun checkAnswer(
-        answer: String,
         context: Context,
+        answer: String,
         imageName: String,
-        imageView: ImageView
+        imageView: ImageView,
+        editText: EditText,
+        chronometer: Chronometer,
+        progressIndicator:LinearProgressIndicator,
+        button: Button
     ) {
         if (answer == imageName) {
             IAnswerCheckView.showTrueIcon(context)
-            val n = (0..maxDrawings).random()
 
-            imageView.setImageResource(cards[n])
-            imageView.tag = cards[n]
+            // останавливаем таймер, выключаем кнопки перед задержкой
+            chronometer.stop()
+            editText.isEnabled = false
+            button.isClickable = false
+            val handler = Handler()
+            handler.postDelayed(Runnable {
+                // обратно всё включаем после задержки
+                editText.isEnabled = true
+                button.isClickable = true
+
+                getRandomPicture(imageView)
+
+                // Запускает хронометер заново в случае правильного ответа
+                chronometer.base = SystemClock.elapsedRealtime() + AppPreferences.time * 1000
+                chronometer.start()
+                progressIndicator.max = AppPreferences.time
+
+                // Очищает поле после правильного ответа
+                editText.text.clear()
+            }, 2500)
 
         } else {
             IAnswerCheckView.showFalseIcon(context)
         }
-
     }
 
     override fun getDrawableId(imageView: ImageView): Int {

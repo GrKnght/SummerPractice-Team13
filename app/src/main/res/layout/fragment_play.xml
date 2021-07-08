@@ -7,6 +7,20 @@
     tools:context=".ui.play_screen.HomeFragment">
 
     <ImageView
+        android:id="@+id/iv_coin"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_coin"
+        android:layout_marginBottom="580dp"
+        android:layout_marginEnd="360dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
         android:id="@+id/iv_picture"
         android:layout_width="269dp"
         android:layout_height="151dp"
@@ -20,7 +34,7 @@
         android:contentDescription="@string/pictures" />
 
     <Chronometer
-        android:id="@+id/view_timer"
+        android:id="@+id/chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:format=""
@@ -43,6 +57,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </com.google.android.material.progressindicator.LinearProgressIndicator>
+
+    <View style="@style/Divider"
+        android:id="@+id/separator_main"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/darker_gray">
+    </View>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -69,6 +92,7 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="18sp"
+            android:singleLine="true"
             android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,19 +123,18 @@
         app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/TestFixButton"
+        android:id="@+id/btn_universal"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
-        android:text="FIX"
+        android:text="@string/start"
+        android:textSize="40sp"
         app:backgroundTint="@android:color/transparent"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_guess"
-        app:layout_constraintVertical_bias="0.413"
+        app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="#33AAAAAA"
         app:strokeColor="@color/purple_500"
         app:strokeWidth="2dp" />
