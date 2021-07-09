@@ -25,12 +25,6 @@ class StoreFragment : Fragment() {
             ViewModelProvider(this).get(StoreViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_store, container, false)
 
-
-        //val textView: TextView = root.findViewById(R.id.text_store)
-//        storeViewModel.text.observe(viewLifecycleOwner, {
-//            textView.text = it
-//        })
-
         // Values
         val twentyButton: Button = root.findViewById(R.id.btn_twenty)
         val thirtyButton: Button = root.findViewById(R.id.btn_thirty)
@@ -45,11 +39,25 @@ class StoreFragment : Fragment() {
 
         updatePicturesAvailable(picturesAvailableTextView)
 
+        if (AppPreferences.twentyButtonEnabled == false)
+            twentyButton.isEnabled = false
+
+        if (AppPreferences.thirtyButtonEnabled == false)
+            thirtyButton.isEnabled = false
+
+        if (AppPreferences.fortyButtonEnabled == false)
+            fortyButton.isEnabled = false
+
+        if (AppPreferences.openedPicturesCount == AppPreferences.maxPicturesCount) {
+            twentyButton.isEnabled = false
+            thirtyButton.isEnabled = false
+            fortyButton.isEnabled = false
+        }
+
         testButton.setOnClickListener {
             AppPreferences.coins = AppPreferences.coins?.plus(10)
             coinsTextView.text = AppPreferences.coins.toString()
         }
-
 
         twentyButton.setOnClickListener {
             if (AppPreferences.coins!! >= 20 && AppPreferences.openedPicturesCount!! < 20) {
@@ -58,44 +66,44 @@ class StoreFragment : Fragment() {
                     coinsAnimated,
                     picturesAvailableTextView,
                     coinsTextView,
-                    twentyButton,
                     "-20",
                     20,
                     19
                 )
-
+                twentyButton.isEnabled = false
+                AppPreferences.twentyButtonEnabled = false
             }
         }
 
         thirtyButton.setOnClickListener {
-            if (AppPreferences.coins!! >= 30 && AppPreferences.openedPicturesCount!! < 30 && !twentyButton.isEnabled) {
+            if (AppPreferences.coins!! >= 30 && AppPreferences.openedPicturesCount!! < 30 && !AppPreferences.twentyButtonEnabled!!) {
 
                 storeButtonAction(
                     coinsAnimated,
                     picturesAvailableTextView,
                     coinsTextView,
-                    thirtyButton,
                     "-30",
                     30,
                     29
                 )
-
+                thirtyButton.isEnabled = false
+                AppPreferences.thirtyButtonEnabled = false
             }
         }
 
         fortyButton.setOnClickListener {
-            if (AppPreferences.coins!! >= 40 && AppPreferences.openedPicturesCount!! < 40 && !thirtyButton.isEnabled) {
+            if (AppPreferences.coins!! >= 40 && AppPreferences.openedPicturesCount!! < 40 && !AppPreferences.thirtyButtonEnabled!!) {
 
                 storeButtonAction(
                     coinsAnimated,
                     picturesAvailableTextView,
                     coinsTextView,
-                    fortyButton,
                     "-40",
                     40,
                     39
                 )
-
+                fortyButton.isEnabled = false
+                AppPreferences.fortyButtonEnabled = false
             }
         }
 
@@ -106,13 +114,14 @@ class StoreFragment : Fragment() {
         coinsAnimated: TextView,
         picturesAvailableTextView: TextView,
         coinsTextView: TextView,
-        button: Button,
         decrementText: String,
         moneyDecrementValue: Int,
         picturesOpenedValue: Int
     ) {
         // Появляется и исчезает текст о трате монеток
         coinsAnimated.text = decrementText
+
+        // Анимация вычитания монет
         val valueAnimator = ValueAnimator.ofFloat(0f, 1f, 0f)
         valueAnimator.duration = 3000
         valueAnimator.addUpdateListener { animation ->
@@ -130,16 +139,14 @@ class StoreFragment : Fragment() {
 
         // обновляем текст монет
         coinsTextView.text = AppPreferences.coins.toString()
-
-        button.isEnabled = false
     }
 
-   private fun updatePicturesAvailable(textView: TextView) {
-       textView.text = getString(
-           R.string.available_pictures,
-           AppPreferences.openedPicturesCount.toString(),
-           (AppPreferences.maxPicturesCount?.plus(1)).toString()
-       )
-   }
+    private fun updatePicturesAvailable(textView: TextView) {
+        textView.text = getString(
+            R.string.available_pictures,
+            (AppPreferences.openedPicturesCount?.plus(1)).toString(),
+            (AppPreferences.maxPicturesCount?.plus(1)).toString()
+        )
+    }
 
 }

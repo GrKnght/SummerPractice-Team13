@@ -16,6 +16,9 @@
     <string name="open_thirty_pictures">Открыть 30/40 рисунков</string>
     <string name="open_forty_pictures">Открыть 40/40 рисунков</string>
     <string name="available_pictures">доступно %1$s / %2$s рисунков</string>
+    <string name="spend_40_coins">40 монет</string>
+    <string name="spend_20_coins">20 монет</string>
+    <string name="spend_30_coins">30 монет</string>
 
     <string name="music_volume">Громкость музыки</string>
     <string name="effects_volume">Громкость эффектов</string>

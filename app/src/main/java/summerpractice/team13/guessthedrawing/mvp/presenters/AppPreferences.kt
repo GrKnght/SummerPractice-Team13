@@ -61,15 +61,32 @@ object AppPreferences {
         }
 
     var maxPicturesCount: Int?
-        get() = preferences.getInt("maxPictures", 0)
+        get() = preferences.getInt("maxPictures", 39)
         set(value) = preferences.edit {
             it.putInt("maxPictures", value!!) // 40 - кол-во элементов в массиве рисунков
         }
 
     var openedPicturesCount: Int?
-        get() = preferences.getInt("openedPictures", 0)
+        get() = preferences.getInt("openedPictures", 9)
         set(value) = preferences.edit {
             it.putInt("openedPictures", value!!)
         }
 
+    var twentyButtonEnabled: Boolean?
+        get() = preferences.getBoolean("twentyButtonEnabled", true)
+        set(value) = preferences.edit {
+            it.putBoolean("twentyButtonEnabled", value!!)
+        }
+
+    var thirtyButtonEnabled: Boolean?
+        get() = preferences.getBoolean("thirtyButtonEnabled", true)
+        set(value) = preferences.edit {
+            it.putBoolean("thirtyButtonEnabled", value!!)
+        }
+
+    var fortyButtonEnabled: Boolean?
+        get() = preferences.getBoolean("fortyButtonEnabled", true)
+        set(value) = preferences.edit {
+            it.putBoolean("fortyButtonEnabled", value!!)
+        }
 }

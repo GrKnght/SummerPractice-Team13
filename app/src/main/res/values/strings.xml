@@ -19,6 +19,9 @@
     <string name="open_twenty_pictures">Open 20/40 pictures</string>
     <string name="open_thirty_pictures">Open 30/40 pictures</string>
     <string name="open_forty_pictures">Open 40/40 pictures</string>
+    <string name="spend_40_coins">40 coins</string>
+    <string name="spend_20_coins">20 coins</string>
+    <string name="spend_30_coins">30 coins</string>
 
     <string name="music_volume">Music volume</string>
     <string name="effects_volume">Effects volume</string>
@@ -26,6 +29,7 @@
     <string name="normal">normal</string>
     <string name="choose_language">Choose language</string>
     <string name="russian">Russian</string>
+
 
     <string-array name="difficultyLevels">
         <item>Easy</item>

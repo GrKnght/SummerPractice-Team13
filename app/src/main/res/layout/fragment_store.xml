@@ -56,7 +56,8 @@
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_lock_open" />
+            android:src="@drawable/ic_lock_open"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_twenty_pictures"
@@ -77,7 +78,7 @@
             android:layout_marginStart="275dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20 coins"
+            android:text="@string/spend_20_coins"
             android:textSize="14sp"
             app:backgroundTint="@android:color/transparent"
             app:cornerRadius="10dp"
@@ -112,7 +113,8 @@
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_lock_open" />
+            android:src="@drawable/ic_lock_open"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_thirty_pictures"
@@ -131,7 +133,7 @@
             android:layout_marginStart="275dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="30 coins"
+            android:text="@string/spend_30_coins"
             android:textSize="14sp"
             app:backgroundTint="@android:color/transparent"
             app:cornerRadius="10dp"
@@ -166,7 +168,8 @@
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_lock_open" />
+            android:src="@drawable/ic_lock_open"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_forty_pictures"
@@ -185,7 +188,7 @@
             android:layout_marginStart="275dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="40 coins"
+            android:text="@string/spend_40_coins"
             android:textSize="14sp"
             app:backgroundTint="@android:color/transparent"
             app:cornerRadius="10dp"
@@ -223,6 +226,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

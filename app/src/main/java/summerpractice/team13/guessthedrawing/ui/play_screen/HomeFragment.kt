@@ -73,10 +73,6 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         )
         lostCoinTextView.isVisible=false
 
-        // Инициализация макс. кол-ва рисунков
-        AppPreferences.maxPicturesCount = 39
-        AppPreferences.openedPicturesCount = 10
-
         // По нажатию кнопки на клавиатуре автоматически нажимается кнопка "Guess"
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
