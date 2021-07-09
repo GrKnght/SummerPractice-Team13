@@ -19,6 +19,7 @@ import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.AnswerCheckPresenter
 import summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter.IAnswerCheckPresenter
 import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswerCheckView
+import summerpractice.team13.guessthedrawing.utils.LocaleUtils
 
 
 class HomeFragment : Fragment(), IAnswerCheckView {
@@ -34,6 +35,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
 
         context?.let { AppPreferences.init(it) }
 
+        context?.let { LocaleUtils.setLocaleLanguage(AppPreferences.languageCode.orEmpty(), it) }
         root = inflater.inflate(R.layout.fragment_play, container, false)
 
         // Values

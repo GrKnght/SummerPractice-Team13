@@ -1,5 +1,7 @@
 package summerpractice.team13.guessthedrawing.ui.settings_screen
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.textfield.TextInputLayout
 
 import summerpractice.team13.guessthedrawing.R
@@ -18,13 +20,23 @@ import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.ChangeDifficultyPresenter
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.IChangeDifficultyPresenter
 import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
+import summerpractice.team13.guessthedrawing.utils.LocaleUtils
+
 
 class SettingsFragment : Fragment(), IChangeDifficultyView {
 
+    // TODO: Не переводит hint в textInputLayout
+    // TODO: Не переводит текст в окне с выбором сложности
+    // TODO: Не переводит текст в bottomNavigation
+    // TODO: Подправить и подобрать переводы к каждому слову
+
     private lateinit var ichangeDifficultyPresenter: IChangeDifficultyPresenter
     private lateinit var autoCompleteTextView: AutoCompleteTextView
+    private lateinit var autoCompleteTextViewLang: AutoCompleteTextView
     private lateinit var arrayAdapter: ArrayAdapter<String>
     private lateinit var textField: TextInputLayout
+    private lateinit var textFieldLang: TextInputLayout
+
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
@@ -34,7 +46,10 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
         val difficulties = resources.getStringArray(R.array.difficultyLevels)
         arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, difficulties)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
-        Log.d("Test", "CalledResume")
+
+        val languages = resources.getStringArray(R.array.languages)
+        arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
+        binding.autoCompleteTextViewLang.setAdapter(arrayAdapter)
 
     }
 
@@ -45,12 +60,17 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
     ): View {
 
         context?.let { AppPreferences.init(it) }
+        context?.let { LocaleUtils.setLocaleLanguage(AppPreferences.languageCode.toString(), it) }
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
 
         ichangeDifficultyPresenter = ChangeDifficultyPresenter(this)
 
         val view = binding.root
+
+
+        val sliderMusic = binding.sliderMusic
+
 
         textField = binding.textField
 
@@ -65,7 +85,50 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
 
 
         }
+        textFieldLang = binding.languagesTF
+        autoCompleteTextViewLang = textFieldLang.editText as AutoCompleteTextView
+        autoCompleteTextViewLang.setText(AppPreferences.language) //default English
+        autoCompleteTextViewLang.setOnItemClickListener { _, _, position, _ ->
 
+            if (position == 0) {
+                AppPreferences.languageCode = "en"
+                AppPreferences.language = "English"
+                val l = AppPreferences.languageCode
+
+                context?.let {
+                    if (l != null) {
+                        LocaleUtils.setLocaleLanguage(l, it)
+                    }
+                }
+
+                // Refresh screen
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    fragmentManager?.beginTransaction()?.detach(this)?.commitAllowingStateLoss();
+                    fragmentManager?.beginTransaction()?.attach(this)?.commitAllowingStateLoss();
+                } else {
+                    fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit();
+                }
+
+
+            } else if (position == 1) {
+                AppPreferences.language = "Русский"
+                AppPreferences.languageCode = "ru"
+                val l = AppPreferences.languageCode
+                context?.let {
+                    if (l != null) {
+                        LocaleUtils.setLocaleLanguage(l, it)
+                    }
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    fragmentManager?.beginTransaction()?.detach(this)?.commitNow();
+                    fragmentManager?.beginTransaction()?.attach(this)?.commitNow();
+                } else {
+                    fragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit();
+                }
+            }
+
+
+        }
 
         return view
     }
