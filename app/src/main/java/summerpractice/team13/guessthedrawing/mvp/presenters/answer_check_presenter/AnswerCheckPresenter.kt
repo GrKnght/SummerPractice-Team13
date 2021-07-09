@@ -12,8 +12,6 @@ import summerpractice.team13.guessthedrawing.mvp.views.answer_check_view.IAnswer
 
 class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAnswerCheckPresenter {
 
-    private var maxDrawings = 39
-
     private var cards = arrayOf(
         R.drawable.brain, R.drawable.beach, R.drawable.bread,
         R.drawable.burger, R.drawable.calculator, R.drawable.castle,
@@ -85,7 +83,8 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
     }
 
     override fun getRandomPicture(imageView: ImageView) {
-        val rand = (0..maxDrawings).random()
+        // рандом от 0 до N-го рисунка (N - выставляется через покупку в магазине)
+        val rand = (0..AppPreferences.openedPicturesCount!!).random()
         imageView.setImageResource(cards[rand])
         imageView.tag = cards[rand]
     }

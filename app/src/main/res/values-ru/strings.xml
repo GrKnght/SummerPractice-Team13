@@ -3,16 +3,27 @@
     <string name="store">Магазин</string>
     <string name="settings">Настройки</string>
     <string name="play">Игра</string>
+
     <string name="time">Время</string>
     <string name="guess">УГАДАТЬ!</string>
     <string name="write_your_answer">напишите свой ответ</string>
+    <string name="try_again">ЕЩЁ РАЗ!</string>
+    <string name="start">НАЧАТЬ!</string>
+    <string name="time_remaining">времени осталось: %1$s сек</string>
+    <string name="you_lost_coin">ВЫ ПОТЕРЯЛИ 1 МОНЕТУ 😔</string>
+
+    <string name="open_twenty_pictures">Открыть 20/40 рисунков</string>
+    <string name="open_thirty_pictures">Открыть 30/40 рисунков</string>
+    <string name="open_forty_pictures">Открыть 40/40 рисунков</string>
+    <string name="available_pictures">доступно %1$s / %2$s рисунков</string>
+
     <string name="music_volume">Громкость музыки</string>
     <string name="effects_volume">Громкость эффектов</string>
     <string name="difficult_level">Уровень сложности</string>
-    <string name="try_again">ЕЩЁ РАЗ!</string>
-    <string name="start">НАЧАТЬ!</string>
     <string name="choose_language">Выберите язык</string>
-    <string name="time_remaining">времени осталось: %1$s сек</string>
+    <string name="normal">Обычный</string>
+    <string name="russian">Русский</string>
+
 <string-array name="difficultyLevels">
     <item>Легкий</item>
     <item>Обычный</item>
@@ -23,7 +34,5 @@
     <item>English</item>
     <item>Русский</item>
 </string-array>
-    <string name="normal">Обычный</string>
-    <string name="russian">Русский</string>
-    <string name="you_lost_coin">ВЫ ПОТЕРЯЛИ 1 МОНЕТУ 😔</string>
+
 </resources>

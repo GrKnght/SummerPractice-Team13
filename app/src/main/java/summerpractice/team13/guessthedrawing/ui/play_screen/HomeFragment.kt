@@ -73,6 +73,9 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         )
         lostCoinTextView.isVisible=false
 
+        // Инициализация макс. кол-ва рисунков
+        AppPreferences.maxPicturesCount = 39
+        AppPreferences.openedPicturesCount = 10
 
         // По нажатию кнопки на клавиатуре автоматически нажимается кнопка "Guess"
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
@@ -112,8 +115,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         chronometer.setOnChronometerTickListener {
             val elapsedMillis: Long = chronometer.base - SystemClock.elapsedRealtime()
 
-            timeRemainingTextView.text =
-                getString(R.string.time_remaining, (elapsedMillis / 1000).toString())
+            timeRemainingTextView.text = getString(R.string.time_remaining, (elapsedMillis / 1000).toString())
             progressIndicator.progress = (elapsedMillis / 1000).toInt()
 
             if (progressIndicator.progress <= 0) {

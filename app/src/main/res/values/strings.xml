@@ -10,16 +10,22 @@
     <string name="guess">GUESS!</string>
     <string name="write_your_answer">write your answer</string>
     <string name="pictures" translatable="false">Pictures</string>
+    <string name="try_again">TRY AGAIN!</string>
+    <string name="start">START!</string>
+    <string name="time_remaining">time remaining: %1$s sec</string>
+    <string name="you_lost_coin">YOU LOST 1 COIN 😔</string>
+
+    <string name="available_pictures">available %1$s / %2$s pictures</string>
+    <string name="open_twenty_pictures">Open 20/40 pictures</string>
+    <string name="open_thirty_pictures">Open 30/40 pictures</string>
+    <string name="open_forty_pictures">Open 40/40 pictures</string>
+
     <string name="music_volume">Music volume</string>
     <string name="effects_volume">Effects volume</string>
     <string name="difficult_level">Difficult Levels</string>
-    <string name="try_again">TRY AGAIN!</string>
-    <string name="start">START!</string>
     <string name="normal">normal</string>
     <string name="choose_language">Choose language</string>
     <string name="russian">Russian</string>
-    <string name="time_remaining">time remaining: %1$s sec</string>
-    <string name="you_lost_coin">YOU LOST 1 COIN 😔</string>
 
     <string-array name="difficultyLevels">
         <item>Easy</item>
