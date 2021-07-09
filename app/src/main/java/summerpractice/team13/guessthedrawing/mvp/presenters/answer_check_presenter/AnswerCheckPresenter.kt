@@ -1,5 +1,6 @@
 package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presenter
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Handler
 import android.os.SystemClock
@@ -36,12 +37,22 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
         chronometer: Chronometer,
         progressIndicator: LinearProgressIndicator,
         button: Button,
-        coins: TextView
+        coins: TextView,
+        coinsAnimated: TextView
     ) {
         if (answer == imageName) {
             IAnswerCheckView.showTrueIcon(context)
             AppPreferences.coins = AppPreferences.coins?.plus(1)
             coins.text = AppPreferences.coins.toString()
+
+            // Появляется и исчезает текст о +1 монете
+            val valueAnimator = ValueAnimator.ofFloat(0f, 1f, 0f)
+            valueAnimator.duration = 3000
+            valueAnimator.addUpdateListener { animation ->
+                val alpha = animation.animatedValue as Float
+                coinsAnimated.alpha = alpha
+            }
+            valueAnimator.start()
 
             // останавливаем таймер, выключаем кнопки перед задержкой
             chronometer.stop()

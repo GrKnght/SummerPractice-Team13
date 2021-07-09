@@ -1,5 +1,6 @@
 package summerpractice.team13.guessthedrawing.ui.play_screen
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -39,16 +40,22 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         root = inflater.inflate(R.layout.fragment_play, container, false)
 
         // Values
-        val coins: TextView = root.findViewById(R.id.coinTV)
+        val coins: TextView = root.findViewById(R.id.tv_coin)
+        val pictureImageView: ImageView = root.findViewById(R.id.iv_picture)
         val guessButton: Button = root.findViewById(R.id.btn_guess)
+
         val answerEditText: EditText = root.findViewById(R.id.et_answer)
         val answerTextInput: TextInputLayout = root.findViewById(R.id.ti_answer)
-        val pictureImageView: ImageView = root.findViewById(R.id.iv_picture)
+
+        val lostCoinTextView: TextView = root.findViewById(R.id.tv_lost_coin)
+        val universalButton: Button = root.findViewById(R.id.btn_universal)
+
+        val coinImageView: ImageView = root.findViewById(R.id.iv_coin)
+        val coinsAnimated: TextView = root.findViewById(R.id.tv_coin_animated)
+
         val progressIndicator: LinearProgressIndicator = root.findViewById(R.id.progress_indicator)
         val chronometer: Chronometer = root.findViewById(R.id.chronometer)
-        val universalButton: Button = root.findViewById(R.id.btn_universal)
-        val coinImageView: ImageView = root.findViewById(R.id.iv_coin)
-        val testTextView: TextView = root.findViewById(R.id.testTextView)
+        val timeRemainingTextView: TextView = root.findViewById(R.id.tv_time_remaining)
         val mainSeparator: View = root.findViewById(R.id.separator_main)
 
         // Default
@@ -58,12 +65,14 @@ class HomeFragment : Fragment(), IAnswerCheckView {
             answerTextInput,
             pictureImageView,
             progressIndicator,
-            testTextView,
+            timeRemainingTextView,
             universalButton,
             mainSeparator,
             coinImageView,
             coins
         )
+        lostCoinTextView.isVisible=false
+
 
         // По нажатию кнопки на клавиатуре автоматически нажимается кнопка "Guess"
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
@@ -90,7 +99,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                     chronometer,
                     progressIndicator,
                     guessButton,
-                    coins
+                    coins,
+                    coinsAnimated
                 )
             }
 
@@ -102,7 +112,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         chronometer.setOnChronometerTickListener {
             val elapsedMillis: Long = chronometer.base - SystemClock.elapsedRealtime()
 
-            testTextView.text = (elapsedMillis / 1000).toString()
+            timeRemainingTextView.text =
+                getString(R.string.time_remaining, (elapsedMillis / 1000).toString())
             progressIndicator.progress = (elapsedMillis / 1000).toInt()
 
             if (progressIndicator.progress <= 0) {
@@ -119,12 +130,29 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                         answerTextInput,
                         pictureImageView,
                         progressIndicator,
-                        testTextView,
+                        timeRemainingTextView,
                         universalButton,
                         mainSeparator,
                         coinImageView,
                         coins
                     )
+                    lostCoinTextView.isVisible = true
+                    // Появляется и исчезает текст о потере монетки
+                    val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+                    valueAnimator.duration = 500
+                    valueAnimator.addUpdateListener { animation ->
+                        val alpha = animation.animatedValue as Float
+                        lostCoinTextView.alpha = alpha
+                    }
+                    valueAnimator.start()
+
+                    // если время вышло, то вычитаем 1 монету
+                    if (AppPreferences.coins!! > 0)
+                        AppPreferences.coins = AppPreferences.coins?.minus(1)
+
+                    // обновляем textview монет
+                    coins.text = AppPreferences.coins.toString()
+
                     // меняет текст кнопки "Start"
                     universalButton.text = getString(R.string.try_again)
 
@@ -139,12 +167,16 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                 answerTextInput,
                 pictureImageView,
                 progressIndicator,
-                testTextView,
+                timeRemainingTextView,
                 universalButton,
                 mainSeparator,
                 coinImageView,
                 coins
             )
+            lostCoinTextView.isVisible = false
+
+            // обновляем textview монет
+            coins.text = AppPreferences.coins.toString()
 
             // Показывает рандомный рисунок
             ianswerCheckPresenter.getRandomPicture(pictureImageView)
@@ -167,8 +199,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         answerTextInput: TextInputLayout,
         pictureImageView: ImageView,
         progressIndicator: LinearProgressIndicator,
-        testTextView: TextView,
-        testFixButton: Button,
+        timeRemainingTextView: TextView,
+        universalButton: Button,
         mainSeparator: View,
         coinImageView: ImageView,
         coins: TextView
@@ -179,12 +211,12 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         answerTextInput.isVisible = true
         pictureImageView.isVisible = true
         progressIndicator.isVisible = true
-        testTextView.isVisible = true
+        timeRemainingTextView.isVisible = true
         mainSeparator.isVisible = true
         coinImageView.isVisible = true
         coins.isVisible = true
 
-        testFixButton.isVisible = false
+        universalButton.isVisible = false
     }
 
     private fun elementsNotVisible(
@@ -193,8 +225,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         answerTextInput: TextInputLayout,
         pictureImageView: ImageView,
         progressIndicator: LinearProgressIndicator,
-        testTextView: TextView,
-        testFixButton: Button,
+        timeRemainingTextView: TextView,
+        universalButton: Button,
         mainSeparator: View,
         coinImageView: ImageView,
         coins: TextView
@@ -205,13 +237,12 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         answerTextInput.isVisible = false
         pictureImageView.isVisible = false
         progressIndicator.isVisible = false
-        testTextView.isVisible = false
+        timeRemainingTextView.isVisible = false
         mainSeparator.isVisible = false
         coinImageView.isVisible = false
         coins.isVisible = false
 
-
-        testFixButton.isVisible = true
+        universalButton.isVisible = true
     }
 
 

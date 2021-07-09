@@ -7,7 +7,6 @@
     <string name="trueAnswer" translatable="false">TrueAnswer</string>
     <string name="falseAnswer" translatable="false">FalseAnswer</string>
     <string name="time">Time</string>
-    <string name="_15sec">15sec</string>
     <string name="guess">GUESS!</string>
     <string name="write_your_answer">write your answer</string>
     <string name="pictures" translatable="false">Pictures</string>
@@ -19,6 +18,8 @@
     <string name="normal">normal</string>
     <string name="choose_language">Choose language</string>
     <string name="russian">Russian</string>
+    <string name="time_remaining">time remaining: %1$s sec</string>
+    <string name="you_lost_coin">YOU LOST 1 COIN 😔</string>
 
     <string-array name="difficultyLevels">
         <item>Easy</item>

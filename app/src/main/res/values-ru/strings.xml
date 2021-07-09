@@ -4,15 +4,15 @@
     <string name="settings">Настройки</string>
     <string name="play">Игра</string>
     <string name="time">Время</string>
-    <string name="_15sec">15сек</string>
     <string name="guess">УГАДАТЬ!</string>
     <string name="write_your_answer">напишите свой ответ</string>
     <string name="music_volume">Громкость музыки</string>
     <string name="effects_volume">Громкость эффектов</string>
     <string name="difficult_level">Уровень сложности</string>
-    <string name="try_again">ПОПРОБУЙ ЕЩЁ РАЗ!</string>
+    <string name="try_again">ЕЩЁ РАЗ!</string>
     <string name="start">НАЧАТЬ!</string>
     <string name="choose_language">Выберите язык</string>
+    <string name="time_remaining">времени осталось: %1$s сек</string>
 <string-array name="difficultyLevels">
     <item>Легкий</item>
     <item>Обычный</item>
@@ -25,4 +25,5 @@
 </string-array>
     <string name="normal">Обычный</string>
     <string name="russian">Русский</string>
+    <string name="you_lost_coin">ВЫ ПОТЕРЯЛИ 1 МОНЕТУ 😔</string>
 </resources>
