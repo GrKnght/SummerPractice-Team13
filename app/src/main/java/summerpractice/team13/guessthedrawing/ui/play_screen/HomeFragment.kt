@@ -71,7 +71,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
             coinImageView,
             coins
         )
-        lostCoinTextView.isVisible=false
+        lostCoinTextView.isVisible = false
 
         // По нажатию кнопки на клавиатуре автоматически нажимается кнопка "Guess"
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
@@ -111,7 +111,8 @@ class HomeFragment : Fragment(), IAnswerCheckView {
         chronometer.setOnChronometerTickListener {
             val elapsedMillis: Long = chronometer.base - SystemClock.elapsedRealtime()
 
-            timeRemainingTextView.text = getString(R.string.time_remaining, (elapsedMillis / 1000).toString())
+            timeRemainingTextView.text =
+                getString(R.string.time_remaining, (elapsedMillis / 1000).toString())
             progressIndicator.progress = (elapsedMillis / 1000).toInt()
 
             if (progressIndicator.progress <= 0) {
@@ -142,6 +143,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                         val alpha = animation.animatedValue as Float
                         lostCoinTextView.alpha = alpha
                     }
+
                     valueAnimator.start()
 
                     // если время вышло, то вычитаем 1 монету
