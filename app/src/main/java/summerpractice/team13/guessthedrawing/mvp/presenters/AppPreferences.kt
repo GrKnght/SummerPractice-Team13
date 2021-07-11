@@ -90,16 +90,21 @@ object AppPreferences {
             it.putBoolean("fortyButtonEnabled", value!!)
         }
 
-    var playMusicButtonEnabled: Boolean?
-        get() = preferences.getBoolean("playMusicButtonEnabled", true)
+    var playMusicButtonEnabled: Boolean
+        get() = preferences.getBoolean("playMusicButtonEnabled", false)
         set(value) = preferences.edit {
-            it.putBoolean("playMusicButtonEnabled", value!!)
+            it.putBoolean("playMusicButtonEnabled", value)
         }
 
-    var stopMusicButtonEnabled: Boolean?
-        get() = preferences.getBoolean("stopMusicButtonEnabled", false)
+    var stopMusicButtonEnabled: Boolean
+        get() = preferences.getBoolean("stopMusicButtonEnabled", true)
         set(value) = preferences.edit {
-            it.putBoolean("stopMusicButtonEnabled", value!!)
+            it.putBoolean("stopMusicButtonEnabled", value)
+        }
+    var instanceNull: Boolean?
+        get() = preferences.getBoolean("instance", true)
+        set(value) = preferences.edit {
+            it.putBoolean("instance", value!!)
         }
 
 }

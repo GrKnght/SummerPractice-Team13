@@ -1,6 +1,5 @@
 package summerpractice.team13.guessthedrawing.ui.settings_screen
 
-import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -8,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.textfield.TextInputLayout
 import summerpractice.team13.guessthedrawing.R
 import summerpractice.team13.guessthedrawing.databinding.FragmentSettingsBinding
@@ -19,6 +20,7 @@ import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_pr
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.IChangeDifficultyPresenter
 import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
 import summerpractice.team13.guessthedrawing.utils.LocaleUtils
+import summerpractice.team13.guessthedrawing.utils.PlayerSaver
 
 
 class SettingsFragment : Fragment(), IChangeDifficultyView {
@@ -67,29 +69,46 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
         val playMusic: Button = view.findViewById(R.id.btn_play_music)
         val stopMusic: Button = view.findViewById(R.id.btn_stop_music)
 
-        context?.let { mp = MediaPlayer.create(it, R.raw.music) }
+        // PlayerSaver.instance
+
+
+        // if (AppPreferences.instanceNull == true) {
+
+        mp = MediaPlayer.create(context, R.raw.music)
+
+        println("---------${mp}-------------")
         mp.isLooping = true
         mp.setVolume(0.5f, 0.5f)
 
+        //AppPreferences.instanceNull = false
+
+        //}
         playMusic.setOnClickListener {
             if (mp.isPlaying) {
                 mp.start()
             } else {
                 mp.start()
             }
-            playMusic.isEnabled = false
-            stopMusic.isEnabled = true
+            AppPreferences.playMusicButtonEnabled = false
+            AppPreferences.stopMusicButtonEnabled = true
+            playMusic.isEnabled = AppPreferences.playMusicButtonEnabled
+            stopMusic.isEnabled = AppPreferences.stopMusicButtonEnabled
+            PlayerSaver.list.add(mp)
+
         }
 
         stopMusic.setOnClickListener {
-            if (mp.isPlaying) {
-                mp.pause()
+            if (PlayerSaver.list.last().isPlaying) {
+                PlayerSaver.list.last().pause()
             } else {
-                mp.pause()
+                PlayerSaver.list.last().pause()
             }
-            playMusic.isEnabled = true
-            stopMusic.isEnabled = false
+            AppPreferences.playMusicButtonEnabled = true
+            AppPreferences.stopMusicButtonEnabled = false
+            playMusic.isEnabled = AppPreferences.playMusicButtonEnabled
+            stopMusic.isEnabled = AppPreferences.stopMusicButtonEnabled
         }
+
 
         textField = binding.textField
         autoCompleteTextView = textField.editText as AutoCompleteTextView
@@ -145,6 +164,9 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        //PlayerSaver.list.clear()
+
+
         Log.d("Test", "CalledOnDestroyView")
 
     }
