@@ -2,6 +2,7 @@ package summerpractice.team13.guessthedrawing.mvp.presenters.answer_check_presen
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Handler
 import android.os.SystemClock
 import android.widget.*
@@ -39,7 +40,15 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
         coinsAnimated: TextView
     ) {
         if (answer == imageName) {
+
+            // появляется тоаст
             IAnswerCheckView.showTrueIcon(context)
+
+            // звук правильного ответа
+            val mp: MediaPlayer = MediaPlayer.create(context, R.raw.correct_answer)
+            mp.setVolume(0.5f, 0.5f)
+            mp.start()
+
             AppPreferences.coins = AppPreferences.coins?.plus(1)
             coins.text = AppPreferences.coins.toString()
 
@@ -75,6 +84,10 @@ class AnswerCheckPresenter(private var IAnswerCheckView: IAnswerCheckView) : IAn
 
         } else {
             IAnswerCheckView.showFalseIcon(context)
+            // звук неправильного ответа
+            val mp: MediaPlayer = MediaPlayer.create(context, R.raw.wrong_answer)
+            mp.setVolume(0.5f, 0.5f)
+            mp.start()
         }
     }
 

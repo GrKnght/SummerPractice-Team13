@@ -61,21 +61,19 @@ class StoreFragment : Fragment(), IBuyCardsView {
         }
 
         twentyButton.setOnClickListener {
-            if (
-
-                presenter.onBuyCards(
-                    coinsAnimated,
-                    picturesAvailableTextView,
-                    coinsTextView,
-                    20,
-                    20,
-                    true
-                )
-            ) {
-                twentyButton.isEnabled = false
-                AppPreferences.twentyButtonEnabled = false
-            }
-
+                if (
+                    presenter.onBuyCards(
+                        coinsAnimated,
+                        picturesAvailableTextView,
+                        coinsTextView,
+                        20,
+                        20,
+                        false
+                    )
+                ) {
+                    twentyButton.isEnabled = false
+                    AppPreferences.twentyButtonEnabled = false
+                }
 
 //            if (AppPreferences.coins!! >= 20 && AppPreferences.openedPicturesCount!! < 20) {
 //                storeButtonAction(
@@ -92,19 +90,22 @@ class StoreFragment : Fragment(), IBuyCardsView {
         }
 
         thirtyButton.setOnClickListener {
-            if (
-                presenter.onBuyCards(
-                    coinsAnimated,
-                    picturesAvailableTextView,
-                    coinsTextView,
-                    30,
-                    30,
-                    AppPreferences.twentyButtonEnabled!!
-                )
-            ) {
-                thirtyButton.isEnabled = false
-                AppPreferences.thirtyButtonEnabled = false
-            }
+            //if (!AppPreferences.twentyButtonEnabled!!) {
+                if (
+                    presenter.onBuyCards(
+                        coinsAnimated,
+                        picturesAvailableTextView,
+                        coinsTextView,
+                        30,
+                        30,
+                        AppPreferences.twentyButtonEnabled!!
+                    )
+                ) {
+                    thirtyButton.isEnabled = false
+                    AppPreferences.thirtyButtonEnabled = false
+                }
+            //}
+
 //            if (AppPreferences.coins!! >= 30 && AppPreferences.openedPicturesCount!! < 30 && !AppPreferences.twentyButtonEnabled!!) {
 //                storeButtonAction(
 //                    coinsAnimated,
@@ -120,20 +121,22 @@ class StoreFragment : Fragment(), IBuyCardsView {
         }
 
         fortyButton.setOnClickListener {
-            if (
+            //if (!AppPreferences.thirtyButtonEnabled!!) {
+                if (
+                    presenter.onBuyCards(
+                        coinsAnimated,
+                        picturesAvailableTextView,
+                        coinsTextView,
+                        40,
+                        40,
+                        AppPreferences.thirtyButtonEnabled!!
+                    )
+                ) {
+                    fortyButton.isEnabled = false
+                    AppPreferences.fortyButtonEnabled = false
+                }
+           // }
 
-                presenter.onBuyCards(
-                    coinsAnimated,
-                    picturesAvailableTextView,
-                    coinsTextView,
-                    40,
-                    40,
-                    AppPreferences.thirtyButtonEnabled!!
-                )
-            ) {
-                fortyButton.isEnabled = false
-                AppPreferences.fortyButtonEnabled = false
-            }
             //            if (AppPreferences.coins!! >= 40 && AppPreferences.openedPicturesCount!! < 40 && !AppPreferences.thirtyButtonEnabled!!) {
 //                storeButtonAction(
 //                    coinsAnimated,

@@ -20,8 +20,7 @@
     <string name="spend_20_coins">20 монет</string>
     <string name="spend_30_coins">30 монет</string>
 
-    <string name="music_volume">Громкость музыки</string>
-    <string name="effects_volume">Громкость эффектов</string>
+    <string name="music">Музыка</string>
     <string name="difficult_level">Уровень сложности</string>
     <string name="choose_language">Выберите язык</string>
     <string name="normal">Обычный</string>

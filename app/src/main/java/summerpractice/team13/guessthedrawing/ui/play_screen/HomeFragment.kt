@@ -2,6 +2,7 @@ package summerpractice.team13.guessthedrawing.ui.play_screen
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -24,6 +25,9 @@ import summerpractice.team13.guessthedrawing.utils.LocaleUtils
 
 
 class HomeFragment : Fragment(), IAnswerCheckView {
+
+//    private lateinit var mp: MediaPlayer
+//    private var totalTime: Int = 0
 
     private lateinit var ianswerCheckPresenter: IAnswerCheckPresenter
     private lateinit var root: View

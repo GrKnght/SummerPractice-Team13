@@ -14,23 +14,27 @@ class BuyCardsPresenter(private var iBuyCardsView: IBuyCardsView) : IBuyCardsPre
         coinsTextView: TextView, coinsValue: Int, picturesValue: Int, enabledButton: Boolean
     ) :Boolean{
 
-        if (conditionIsTrue(coinsValue, picturesValue, enabledButton)) {
+        if (conditionIsTrue(coinsValue, picturesValue)) {
 
-            textUpdateWithAnimation(coinsAnimated, "$coinsValue")
+            if (!enabledButton) {
+                textUpdateWithAnimation(coinsAnimated, "$coinsValue")
 
-            AppPreferences.coins = AppPreferences.coins?.minus(coinsValue)
-            // присваиваем Z монет
-            AppPreferences.openedPicturesCount = picturesValue - 1
+                AppPreferences.coins = AppPreferences.coins?.minus(coinsValue)
+                // присваиваем Z монет
+                AppPreferences.openedPicturesCount = picturesValue - 1
 
-            iBuyCardsView.updateAvailablePictures(picturesAvailableTextView)
-            // обновляем текст монет
-            coinsTextView.text = AppPreferences.coins.toString()
-            iBuyCardsView.onSuccess("Bought!")
-            return true
+                iBuyCardsView.updateAvailablePictures(picturesAvailableTextView)
+                // обновляем текст монет
+                coinsTextView.text = AppPreferences.coins.toString()
+                iBuyCardsView.onSuccess("Bought!")
+                return true
 
+            } else {
+                iBuyCardsView.onFailed("Buy the previous one!")
+            }
 
         } else {
-            iBuyCardsView.onFailed("Fail")
+            iBuyCardsView.onFailed("Not enough coins!")
         }
         return false
 
@@ -38,8 +42,7 @@ class BuyCardsPresenter(private var iBuyCardsView: IBuyCardsView) : IBuyCardsPre
 
     private fun conditionIsTrue(
         coinsValue: Int,
-        picturesValue: Int,
-        enabledButton: Boolean
+        picturesValue: Int
     ): Boolean {
         // AppPreferences.coins!! >= 30 && AppPreferences.openedPicturesCount!! < 30 && !AppPreferences.twentyButtonEnabled!!
 
