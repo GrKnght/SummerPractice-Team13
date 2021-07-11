@@ -47,14 +47,64 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putFloat("sliderMusicValue", value!!)
         }
+
     var sliderEffectsValue: Float?
         get() = preferences.getFloat("sliderEffectsValue", 50.0F)
         set(value) = preferences.edit {
             it.putFloat("sliderEffectsValue", value!!)
         }
+
     var coins: Int?
         get() = preferences.getInt("coin", 0)
         set(value) = preferences.edit {
             it.putInt("coin", value!!)
         }
+
+    var maxPicturesCount: Int?
+        get() = preferences.getInt("maxPictures", 39)
+        set(value) = preferences.edit {
+            it.putInt("maxPictures", value!!) // 40 - кол-во элементов в массиве рисунков
+        }
+
+    var openedPicturesCount: Int?
+        get() = preferences.getInt("openedPictures", 9)
+        set(value) = preferences.edit {
+            it.putInt("openedPictures", value!!)
+        }
+
+    var twentyButtonEnabled: Boolean?
+        get() = preferences.getBoolean("twentyButtonEnabled", true)
+        set(value) = preferences.edit {
+            it.putBoolean("twentyButtonEnabled", value!!)
+        }
+
+    var thirtyButtonEnabled: Boolean?
+        get() = preferences.getBoolean("thirtyButtonEnabled", true)
+        set(value) = preferences.edit {
+            it.putBoolean("thirtyButtonEnabled", value!!)
+        }
+
+    var fortyButtonEnabled: Boolean?
+        get() = preferences.getBoolean("fortyButtonEnabled", true)
+        set(value) = preferences.edit {
+            it.putBoolean("fortyButtonEnabled", value!!)
+        }
+
+    var playMusicButtonEnabled: Boolean
+        get() = preferences.getBoolean("playMusicButtonEnabled", false)
+        set(value) = preferences.edit {
+            it.putBoolean("playMusicButtonEnabled", value)
+        }
+
+    var stopMusicButtonEnabled: Boolean
+        get() = preferences.getBoolean("stopMusicButtonEnabled", true)
+        set(value) = preferences.edit {
+            it.putBoolean("stopMusicButtonEnabled", value)
+        }
+    var instanceNull: Boolean?
+        get() = preferences.getBoolean("instance", true)
+        set(value) = preferences.edit {
+            it.putBoolean("instance", value!!)
+        }
+
 }

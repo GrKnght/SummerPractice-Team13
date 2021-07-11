@@ -2,6 +2,7 @@ package summerpractice.team13.guessthedrawing.ui.play_screen
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -24,6 +25,9 @@ import summerpractice.team13.guessthedrawing.utils.LocaleUtils
 
 
 class HomeFragment : Fragment(), IAnswerCheckView {
+
+//    private lateinit var mp: MediaPlayer
+//    private var totalTime: Int = 0
 
     private lateinit var ianswerCheckPresenter: IAnswerCheckPresenter
     private lateinit var root: View
@@ -71,8 +75,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
             coinImageView,
             coins
         )
-        lostCoinTextView.isVisible=false
-
+        lostCoinTextView.isVisible = false
 
         // По нажатию кнопки на клавиатуре автоматически нажимается кнопка "Guess"
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
@@ -144,6 +147,7 @@ class HomeFragment : Fragment(), IAnswerCheckView {
                         val alpha = animation.animatedValue as Float
                         lostCoinTextView.alpha = alpha
                     }
+
                     valueAnimator.start()
 
                     // если время вышло, то вычитаем 1 монету

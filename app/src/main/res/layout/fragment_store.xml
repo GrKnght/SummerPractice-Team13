@@ -7,175 +7,236 @@
     android:layout_height="match_parent"
     tools:context=".ui.store_screen.StoreFragment">
 
+    <ImageView
+        android:id="@+id/iv_coin"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_coin"
+        app:layout_constraintEnd_toStartOf="@+id/tv_coin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/tv_coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        tools:text="0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_coin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_coin" />
+
+
+    <TextView
+        android:id="@+id/tv_coin_animated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:alpha="0"
+        android:text="+1"
+        app:layout_constraintEnd_toStartOf="@+id/testTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/tv_coin"
+        app:layout_constraintTop_toTopOf="@id/tv_coin"
+        tools:ignore="HardcodedText" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:layout_marginTop="35dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_lock1"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lock_open"
+            tools:ignore="ContentDescription" />
 
-            <View
-                android:id="@+id/line_15"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
+        <TextView
+            android:id="@+id/tv_twenty_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/open_twenty_pictures"
+            android:textSize="18sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-                android:background="@android:color/darker_gray"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_twenty"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_marginStart="275dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spend_20_coins"
+            android:textSize="14sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="10dp"
+            app:rippleColor="#33AAAAAA"
+            app:strokeColor="@color/purple_500"
+            app:strokeWidth="2dp" />
+    </FrameLayout>
 
+    <View
+        android:id="@+id/separator5"
+        style="@style/Divider"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="564dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout4"
+        app:layout_constraintVertical_bias="0.0" />
 
-            <ImageView
-                android:id="@+id/coin_15"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/coins" />
+    <FrameLayout
+        android:id="@+id/frameLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout4">
 
-            <TextView
-                android:id="@+id/text_15"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="15"
-                android:textSize="27sp"/>
+        <ImageView
+            android:id="@+id/iv_lock2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_lock_open"
+            tools:ignore="ContentDescription" />
 
+        <TextView
+            android:id="@+id/tv_thirty_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/open_thirty_pictures"
+            android:textSize="18sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_15"
-                android:layout_marginEnd="20dp"
-                android:layout_alignParentEnd="true"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+15"
-                android:textSize="24sp"
-                app:backgroundTint="@android:color/transparent"
-                app:cornerRadius="10dp"
-                app:rippleColor="#33AAAAAA"
-                app:strokeColor="@color/purple_500"
-                app:strokeWidth="2dp" />
-        </RelativeLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_thirty"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="275dp"
+            android:text="@string/spend_30_coins"
+            android:textSize="14sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="10dp"
+            app:rippleColor="#33AAAAAA"
+            app:strokeColor="@color/purple_500"
+            app:strokeWidth="2dp" />
+    </FrameLayout>
 
-
-
-        <RelativeLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <View
-                android:id="@+id/line_25"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
-
-                android:background="@android:color/darker_gray"/>
-
-
-            <ImageView
-                android:id="@+id/coin_25"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/coins" />
-
-            <TextView
-                android:id="@+id/text_25"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="25"
-                android:textSize="27sp"/>
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_25"
-                android:layout_marginEnd="20dp"
-                android:layout_alignParentEnd="true"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+25"
-                android:textSize="24sp"
-                app:backgroundTint="@android:color/transparent"
-                app:cornerRadius="10dp"
-                app:rippleColor="#33AAAAAA"
-                app:strokeColor="@color/purple_500"
-                app:strokeWidth="2dp" />
-        </RelativeLayout>
-
-
-
-
-
-        <RelativeLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <View
-                android:id="@+id/line_35"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
-
-                android:background="@android:color/darker_gray"/>
+    <View
+        android:id="@+id/separator6"
+        style="@style/Divider"
+        android:layout_marginBottom="272dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout5"
+        app:layout_constraintVertical_bias="0.01999998" />
 
 
-            <ImageView
-                android:id="@+id/coin_35"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/coins" />
-
-            <TextView
-                android:id="@+id/text_35"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="35"
-                android:textSize="27sp"/>
+    <FrameLayout
+        android:id="@+id/frameLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/separator6">
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_35"
-                android:layout_marginEnd="20dp"
-                android:layout_alignParentEnd="true"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+35"
-                android:textSize="24sp"
-                app:backgroundTint="@android:color/transparent"
-                app:cornerRadius="10dp"
-                app:rippleColor="#33AAAAAA"
-                app:strokeColor="@color/purple_500"
-                app:strokeWidth="2dp" />
-        </RelativeLayout>
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_lock3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_lock_open"
+            tools:ignore="ContentDescription" />
 
+        <TextView
+            android:id="@+id/tv_forty_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/open_forty_pictures"
+            android:textSize="18sp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_forty"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="275dp"
+            android:text="@string/spend_40_coins"
+            android:textSize="14sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="10dp"
+            app:rippleColor="#33AAAAAA"
+            app:strokeColor="@color/purple_500"
+            app:strokeWidth="2dp" />
+    </FrameLayout>
+
+    <View
+        android:id="@+id/separator7"
+        style="@style/Divider"
+        android:layout_marginBottom="272dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
+        app:layout_constraintVertical_bias="0.01999998" />
+
+    <TextView
+        android:id="@+id/testTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        tools:text="@string/available_pictures"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/testbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
