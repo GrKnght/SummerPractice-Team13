@@ -42,18 +42,6 @@ object AppPreferences {
             it.putString("langCode", value)
         }
 
-    var sliderMusicValue: Float?
-        get() = preferences.getFloat("sliderMusicValue", 50.0F)
-        set(value) = preferences.edit {
-            it.putFloat("sliderMusicValue", value!!)
-        }
-
-    var sliderEffectsValue: Float?
-        get() = preferences.getFloat("sliderEffectsValue", 50.0F)
-        set(value) = preferences.edit {
-            it.putFloat("sliderEffectsValue", value!!)
-        }
-
     var coins: Int?
         get() = preferences.getInt("coin", 0)
         set(value) = preferences.edit {
@@ -100,11 +88,6 @@ object AppPreferences {
         get() = preferences.getBoolean("stopMusicButtonEnabled", true)
         set(value) = preferences.edit {
             it.putBoolean("stopMusicButtonEnabled", value)
-        }
-    var instanceNull: Boolean?
-        get() = preferences.getBoolean("instance", true)
-        set(value) = preferences.edit {
-            it.putBoolean("instance", value!!)
         }
 
 }

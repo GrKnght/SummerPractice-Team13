@@ -26,9 +26,6 @@ import summerpractice.team13.guessthedrawing.utils.LocaleUtils
 
 class HomeFragment : Fragment(), IAnswerCheckView {
 
-//    private lateinit var mp: MediaPlayer
-//    private var totalTime: Int = 0
-
     private lateinit var ianswerCheckPresenter: IAnswerCheckPresenter
     private lateinit var root: View
 

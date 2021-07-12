@@ -16,15 +16,13 @@ import summerpractice.team13.guessthedrawing.mvp.views.buy_cards_view.IBuyCardsV
 class StoreFragment : Fragment(), IBuyCardsView {
     private val presenter = BuyCardsPresenter(this)
 
-    //private lateinit var storeViewModel: StoreViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        storeViewModel =
-//            ViewModelProvider(this).get(StoreViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_store, container, false)
 
         // Values
@@ -61,137 +59,57 @@ class StoreFragment : Fragment(), IBuyCardsView {
         }
 
         twentyButton.setOnClickListener {
-                if (
-                    presenter.onBuyCards(
-                        coinsAnimated,
-                        picturesAvailableTextView,
-                        coinsTextView,
-                        20,
-                        20,
-                        false
-                    )
-                ) {
-                    twentyButton.isEnabled = false
-                    AppPreferences.twentyButtonEnabled = false
-                }
+            if (
+                presenter.onBuyCards(
+                    coinsAnimated,
+                    picturesAvailableTextView,
+                    coinsTextView,
+                    20,
+                    20,
+                    false
+                )
+            ) {
+                twentyButton.isEnabled = false
+                AppPreferences.twentyButtonEnabled = false
+            }
 
-//            if (AppPreferences.coins!! >= 20 && AppPreferences.openedPicturesCount!! < 20) {
-//                storeButtonAction(
-//                    coinsAnimated,
-//                    picturesAvailableTextView,
-//                    coinsTextView,
-//                    "-20",
-//                    20,
-//                    19
-//                )
-//            twentyButton.isEnabled = false
-//            AppPreferences.twentyButtonEnabled = false
-//            }
         }
 
         thirtyButton.setOnClickListener {
-            //if (!AppPreferences.twentyButtonEnabled!!) {
-                if (
-                    presenter.onBuyCards(
-                        coinsAnimated,
-                        picturesAvailableTextView,
-                        coinsTextView,
-                        30,
-                        30,
-                        AppPreferences.twentyButtonEnabled!!
-                    )
-                ) {
-                    thirtyButton.isEnabled = false
-                    AppPreferences.thirtyButtonEnabled = false
-                }
-            //}
-
-//            if (AppPreferences.coins!! >= 30 && AppPreferences.openedPicturesCount!! < 30 && !AppPreferences.twentyButtonEnabled!!) {
-//                storeButtonAction(
-//                    coinsAnimated,
-//                    picturesAvailableTextView,
-//                    coinsTextView,
-//                    "-30",
-//                    30,
-//                    29
-//                )
-//            thirtyButton.isEnabled = false
-//            AppPreferences.thirtyButtonEnabled = false
-//            }
+            if (
+                presenter.onBuyCards(
+                    coinsAnimated,
+                    picturesAvailableTextView,
+                    coinsTextView,
+                    30,
+                    30,
+                    AppPreferences.twentyButtonEnabled!!
+                )
+            ) {
+                thirtyButton.isEnabled = false
+                AppPreferences.thirtyButtonEnabled = false
+            }
         }
 
         fortyButton.setOnClickListener {
-            //if (!AppPreferences.thirtyButtonEnabled!!) {
-                if (
-                    presenter.onBuyCards(
-                        coinsAnimated,
-                        picturesAvailableTextView,
-                        coinsTextView,
-                        40,
-                        40,
-                        AppPreferences.thirtyButtonEnabled!!
-                    )
-                ) {
-                    fortyButton.isEnabled = false
-                    AppPreferences.fortyButtonEnabled = false
-                }
-           // }
+            if (
+                presenter.onBuyCards(
+                    coinsAnimated,
+                    picturesAvailableTextView,
+                    coinsTextView,
+                    40,
+                    40,
+                    AppPreferences.thirtyButtonEnabled!!
+                )
+            ) {
+                fortyButton.isEnabled = false
+                AppPreferences.fortyButtonEnabled = false
+            }
 
-            //            if (AppPreferences.coins!! >= 40 && AppPreferences.openedPicturesCount!! < 40 && !AppPreferences.thirtyButtonEnabled!!) {
-//                storeButtonAction(
-//                    coinsAnimated,
-//                    picturesAvailableTextView,
-//                    coinsTextView,
-//                    "-40",
-//                    40,
-//                    39
-//                )
-//            fortyButton.isEnabled = false
-//            AppPreferences.fortyButtonEnabled = false
-//            }
         }
 
         return root
     }
-
-//    private fun storeButtonAction(
-//        coinsAnimated: TextView,
-//        picturesAvailableTextView: TextView,
-//        coinsTextView: TextView,
-//        decrementText: String,
-//        moneyDecrementValue: Int,
-//        picturesOpenedValue: Int
-//    ) {
-//        // Появляется и исчезает текст о трате монеток
-//        coinsAnimated.text = decrementText
-//
-//        // Анимация вычитания монет
-//        val valueAnimator = ValueAnimator.ofFloat(0f, 1f, 0f)
-//        valueAnimator.duration = 3000
-//        valueAnimator.addUpdateListener { animation ->
-//            val alpha = animation.animatedValue as Float
-//            coinsAnimated.alpha = alpha
-//        }
-//        valueAnimator.start()
-//
-//        // вычитаем N монет
-//        AppPreferences.coins = AppPreferences.coins?.minus(moneyDecrementValue)
-//        // присваиваем Z монет
-//        AppPreferences.openedPicturesCount = picturesOpenedValue
-//
-//        updatePicturesAvailable(picturesAvailableTextView)
-//
-//        // обновляем текст монет
-//        coinsTextView.text = AppPreferences.coins.toString()
-//    }
-
-//    private fun updatePicturesAvailable(textView: TextView) {
-//        textView.text = getString(
-//            R.string.available_pictures,
-//            (AppPreferences.openedPicturesCount?.plus(1)).toString(),
-//            (AppPreferences.maxPicturesCount?.plus(1)).toString()
-//        )
-//    }
 
     override fun onFailed(message: String) {
 

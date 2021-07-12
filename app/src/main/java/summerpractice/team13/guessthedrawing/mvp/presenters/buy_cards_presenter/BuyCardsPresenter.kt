@@ -44,7 +44,6 @@ class BuyCardsPresenter(private var iBuyCardsView: IBuyCardsView) : IBuyCardsPre
         coinsValue: Int,
         picturesValue: Int
     ): Boolean {
-        // AppPreferences.coins!! >= 30 && AppPreferences.openedPicturesCount!! < 30 && !AppPreferences.twentyButtonEnabled!!
 
         return AppPreferences.coins!! >= coinsValue && AppPreferences.openedPicturesCount!! < picturesValue
 

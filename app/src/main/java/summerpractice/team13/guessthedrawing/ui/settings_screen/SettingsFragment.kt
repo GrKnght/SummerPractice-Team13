@@ -3,7 +3,6 @@ package summerpractice.team13.guessthedrawing.ui.settings_screen
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import summerpractice.team13.guessthedrawing.databinding.FragmentSettingsBinding
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.ChangeDifficultyPresenter
 import summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter.IChangeDifficultyPresenter
-import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
+import summerpractice.team13.guessthedrawing.mvp.views.change_difficulty_view.IChangeDifficultyView
 import summerpractice.team13.guessthedrawing.utils.LocaleUtils
 import summerpractice.team13.guessthedrawing.utils.PlayerSaver
 
@@ -69,20 +68,10 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
         val playMusic: Button = view.findViewById(R.id.btn_play_music)
         val stopMusic: Button = view.findViewById(R.id.btn_stop_music)
 
-        // PlayerSaver.instance
-
-
-        // if (AppPreferences.instanceNull == true) {
-
         mp = MediaPlayer.create(context, R.raw.music)
-
-        println("---------${mp}-------------")
         mp.isLooping = true
         mp.setVolume(0.5f, 0.5f)
 
-        //AppPreferences.instanceNull = false
-
-        //}
         playMusic.setOnClickListener {
             if (mp.isPlaying) {
                 mp.start()
@@ -164,11 +153,6 @@ class SettingsFragment : Fragment(), IChangeDifficultyView {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        //PlayerSaver.list.clear()
-
-
-        Log.d("Test", "CalledOnDestroyView")
-
     }
 
     override fun showTimeToast(message: String) {

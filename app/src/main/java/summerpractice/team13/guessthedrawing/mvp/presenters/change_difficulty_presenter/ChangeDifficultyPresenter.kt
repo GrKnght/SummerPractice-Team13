@@ -1,7 +1,7 @@
 package summerpractice.team13.guessthedrawing.mvp.presenters.change_difficulty_presenter
 
 import summerpractice.team13.guessthedrawing.mvp.presenters.AppPreferences
-import summerpractice.team13.guessthedrawing.mvp.views.change_time_view.IChangeDifficultyView
+import summerpractice.team13.guessthedrawing.mvp.views.change_difficulty_view.IChangeDifficultyView
 
 class ChangeDifficultyPresenter(private var iChangeDifficultyView: IChangeDifficultyView) : IChangeDifficultyPresenter {
 
